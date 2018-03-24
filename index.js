@@ -113,25 +113,33 @@ const connection = require('./models')
 //
 // )
 
-var query  = "create table Place(Place_id int PRIMARY KEY , name varchar(255) NOT NULL)"
+// var query  = "create table Place(Place_id int PRIMARY KEY , name varchar(255) NOT NULL)"
+// connection.query(query,
+//     function(err,results,fields){
+//         console.log(err)
+//         console.log(results)
+//         console.log(fields)
+//     }
+//
+// )
+//
+// var query  = "create table Package(Pcode int PRIMARY KEY , type varchar(255) NOT NULL,facilities varchar(255) , fees int(40) ," +
+//     " OtherDetails varchar(255))"
+//
+// connection.query(query,
+//     function(err,results,fields){
+//         console.log(err)
+//         console.log(results)
+//         console.log(fields)
+//     }
+//
+// )
+//
+var query = "create table practice(first_name varchar(200) ,last_name varchar(200) ,modified Date)"
 connection.query(query,
-    function(err,results,fields){
+    (err,results,fields)=>{
         console.log(err)
         console.log(results)
         console.log(fields)
-    }
-
-)
-
-var query  = "create table Package(Pcode int PRIMARY KEY , type varchar(255) NOT NULL,facilities varchar(255) , fees int(40) ," +
-    " OtherDetails varchar(255))"
-
-connection.query(query,
-    function(err,results,fields){
-        console.log(err)
-        console.log(results)
-        console.log(fields)
-    }
-
-)
+    })
 
