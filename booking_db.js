@@ -14,7 +14,7 @@ function Connect() {
 function createtables() {
 var query=
         "create table Bookings(Bid int auto_increment PRIMARY KEY,"+
-        "Eid int REFERENCES e1mployee(Eid)," +
+        "Eid int REFERENCES employee(Eid)," +
         "user_id int REFERENCES user(user_id),"+
         "Package_code int REFERENCES Package(Pcode)," +
         "travel_to varchar(200) REFERENCES Place(Place_id)," +
@@ -40,6 +40,29 @@ var query=
             // console.log(results)
             // console.log(fields)
         })
+}
+
+function bookingmember() {
+    var query=
+        "create table Booking_member(Bid int REFERENCES Bookings,"+
+        "proof_type varchar(100), " +
+        "id_proof_number int,"+
+        "name varchar(100)," +
+        "age int,"
+    connection.query(query,
+        function(err,results,fields){
+            console.log(err)
+
+        }
+
+    connection.query(query,
+        function(err,results,fields){
+            console.log("Table created");
+            // console.log(err)
+            // console.log(results)
+            // console.log(fields)
+        })
+
 }
 
 function add(source, destination,startdate, callback) {

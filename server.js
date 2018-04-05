@@ -47,6 +47,7 @@ app.post("/profile" ,function(req,res){ // User Page
 app.post('/booking',function (req,res) {
 
     bdb.createtable();
+    var data=req;
 
      // bdb.add(req.body.source,req.body.dest,req.body.myDate,function (data) {
      //     console.log("Added a booking");
