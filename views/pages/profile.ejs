@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged in</title>
+</head>
+<body>
+<h1><%=name%> </h1>
+<!--Booking Profile-->
+
+<form action="/booking" method="post" id="form">
+    <label><b>Source</b></label>
+    <input type="text" placeholder="Source" name="source" id="source" required>
+    <label><b>Destination</b></label>
+    <input type="text" placeholder="Destination" name="dest" id="dest" required>
+    Journey date
+    <input type="date" id="myDate" required>
+
+
+    <button type="submit" id="submit" value="Book">Check availability</button>
+</form>
+
+
+</body>
+</html>
