@@ -14,7 +14,7 @@ function Connect() {
 function createtables() {
 var query=
         "create table Bookings(Bid int auto_increment PRIMARY KEY,"+
-        "Eid int REFERENCES employee(Eid)," +
+        "Eid int REFERENCES e1mployee(Eid)," +
         "user_id int REFERENCES user(user_id),"+
         "Package_code int REFERENCES Package(Pcode)," +
         "travel_to varchar(200) REFERENCES Place(Place_id)," +
