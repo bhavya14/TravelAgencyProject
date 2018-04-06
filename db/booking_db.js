@@ -53,7 +53,7 @@ function bookingmember() {
         function(err,results,fields){
             console.log(err)
 
-        }
+        })
 
     connection.query(query,
         function(err,results,fields){
@@ -67,7 +67,7 @@ function bookingmember() {
 
 function add(source, destination,startdate, callback) {
 
-connection.query(`insert into bookings (travel_from,travel to,start_date) values ('${source}',${destination}',${startdate}') `, function(err, data) {
+connection.query(`insert into Bookings (travel_from,travel to,start_date,PNR) values ('${source}',${destination}',${startdate}',1) `, function(err, data) {
 console.log("Below")
         callback(data);
     })

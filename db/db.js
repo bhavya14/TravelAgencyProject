@@ -14,6 +14,13 @@ function Connect() {
 function signupcheck() {
     
 }
+
+function UsernameCheck(fname,callback) {
+    connection.query(`select first_name from practice WHERE practice.first_name='${fname}'`, function(err,data) {
+
+        callback(data);
+    });
+}
 function display(id,query,password,callback) {
     connection.query('select * from practice where first_name = ' + "\"" + id + "\" AND password = " + password + ";", function(err,data) {
         console.log("data : " , data)
@@ -25,11 +32,13 @@ function display(id,query,password,callback) {
 
 function add(name, password, callback) {
     connection.query(`insert into practice (first_name,password) values ('${name}', '${password}')`, function(err, data) {
+
         callback(data);
     })
 }
 module.exports = {
     connect: Connect,
     display: display,
-    add: add
+    add: add,
+   UsernameCheck: UsernameCheck
 }

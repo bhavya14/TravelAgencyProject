@@ -3,8 +3,9 @@ const app = express();
 const ejs = require('ejs')
 var bodyParser = require('body-parser');
 var path = require('path');
-var db = require('./db');
-var bdb=require('./booking_db');
+var db = require('./db/db');
+var bdb=require('./db/booking_db');
+var udb=require('./db/user_db');
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
@@ -62,12 +63,45 @@ app.post('/booking',function (req,res) {
 app.post('/signup',function (req,res) {
 
 
-db.add(req.body.username2,req.body.password2,function (data) {
-    res.render('pages/profile', {
+    res.render('pages/userdetails', {});
+});
+
+
+
+
+    app.post('/userdetails',function (req,res) {
+   //  udb.createUser();
+console.log("LALALLALA");
+console.log(req.body);
+console.log(req.body.fname);
+
+db.UsernameCheck(req.body.uname,function (data) {
+        console.log("Data to be checked is")
+    console.log(data);
+        if(data.length==0)
+        {
+            udb.adduser(req.body.fname, req.body.lname,req.body.uname,req.body.password,req.body.mail,req.body.dob,req.body.address,req.body.Gender,req.body.proof,req.body.nproof,function (data) {
+                console.log("Done")
+            })
+        }
+        else
+        { console.log("This username is already taken");
+            res.send({
+                "code":400,
+                "failed":"This username is already taken"
+            })
+        }
+        // When doesnt match data.length==0
+    });
+
+
+
+
 
     });
 
-})
+
+
 
     // bdb.add(req.body.source,req.body.dest,req.body.myDate,function (data) {
     //     console.log("Added a booking");
@@ -75,11 +109,11 @@ db.add(req.body.username2,req.body.password2,function (data) {
 
 
 
-})
+
 app.get("/",function(req,res){
 
     res.render('pages/index')
-})
+});
 app.listen(3000, function() {
     console.log("Running on 3000");
     db.connect();
