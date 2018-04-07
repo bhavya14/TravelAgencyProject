@@ -188,7 +188,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="789" />
     <option name="y" value="11" />
     <option name="width" value="584" />
@@ -298,12 +298,12 @@
       <workItem from="1522651307064" duration="2414000" />
       <workItem from="1522774840753" duration="2526000" />
       <workItem from="1522921661381" duration="14367000" />
-      <workItem from="1523006185201" duration="21293000" />
+      <workItem from="1523006185201" duration="21884000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114718000" />
+    <option name="totallyTimeSpent" value="115309000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -315,7 +315,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19642857" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
