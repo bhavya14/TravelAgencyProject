@@ -46,7 +46,7 @@ app.post("/profile" ,function(req,res){
 
 app.post('/booking',function (req,res) {
 
-    bdb.createtable();
+//    bdb.createtable();
     var data=req;
     res.render('pages/booking', {
     });
