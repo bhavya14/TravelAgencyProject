@@ -94,6 +94,27 @@ const connection = require('./models')
 //         }
 //
 // )
+// var query =
+//     "create table Bookings(Bid int PRIMARY KEY,"+
+//     "Eid int REFERENCES employee(Eid)," +
+//     "user_id int REFERENCES user(user_id),"+
+//     "Package_code int REFERENCES Package(Pcode)," +
+//     "travel_to varchar(200) REFERENCES Place(Place_id)," +
+//     // "PNR int " +
+//     "travel_from varchar(200)," +
+//     "Start_Date Date," +
+//     "End_Date Date," +
+//     "Payment varchar(20) REFERENCES Payments(Payment_ID)," +
+//     "Booking_date DATE," +
+//     "Hotel_ID varchar(30) REFERENCES Hotel(Hotel_ID))"
+// connection.query(query,
+//         function(err,results,fields){
+//             console.log(err)
+//             console.log(results)
+//             console.log(fields)
+//         }
+//
+// )
 
 // var query =
 //     "create table Payments(Payment_ID varchar(100) PRIMARY KEY,"+
@@ -137,7 +158,6 @@ const connection = require('./models')
 // )
 //
 
-
 // var query = "create table practice(first_name varchar(200) ,last_name varchar(200) ,modified Date)"
 // connection.query(query,
 //     (err,results,fields)=>{
@@ -174,3 +194,13 @@ const connection = require('./models')
 //         // console.log(results)
 //         // console.log(fields)
 //     })
+
+
+
+var query = "create table practice(first_name varchar(200) ,last_name varchar(200) ,modified Date)";
+connection.query(query,
+    function(err,results,fields){
+        console.log(err)
+        console.log(results)
+        console.log(fields)
+    })
