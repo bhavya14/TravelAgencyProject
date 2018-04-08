@@ -65,7 +65,7 @@ console.log(req.body.fname);
 
 db.UsernameCheck(req.body.uname,function (data) {
         console.log("Data to be checked is")
-    console.log(data);
+        console.log(data);
         if(data.length==0)
         {
             udb.adduser(req.body.fname, req.body.lname,req.body.uname,req.body.password,req.body.mail,req.body.dob,req.body.address,req.body.Gender,req.body.proof,req.body.nproof,function (data) {
@@ -93,6 +93,9 @@ app.post('/bookingForm',function (req,res) {
     res.render('pages/BookingForm',{
         name:req.body.name,
     });
+})
+app.post('/BookingSubmit' , function(req,res){
+
 })
 
 app.listen(3000, function() {

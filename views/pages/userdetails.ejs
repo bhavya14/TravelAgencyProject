@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Logged in</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <h1></h1>
@@ -15,11 +16,11 @@
     <label><b>Username</b></label>
     <input type="text" placeholder="Username" name="uname" id="uname" ></br>
     <label><b>Password</b></label>
-    <input type="password" placeholder="Enter password" name="password" id="password" required></br>
+    <input type="password" minlength=8 placeholder="Enter password" name="password" id="password" required></br>
     <label><b>Email</b></label>
     <input type=email placeholder="Email" name="mail" id="mail" required></br>
     <label><b>Date Of Birth</b></label>
-    <input type="date" id="myDate" name="dob" id="dob" required></br>
+    <input type="date" id="myDate" name="dob" max ="2018-4-8" required></br>
     <label><b>Address</b></label>
     <input type="text" placeholder="Address" name="address" id="address" ></br>
     <label><b>ID PROOF TYPE</b></label>
@@ -32,8 +33,20 @@
     </br>
     <button type="submit" id="submit" value="Book">Sign Up</button>
 </form>
-
-
+<script>
+    $(document).ready(function(){
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear() - 10;
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        var maxDate = year + '-' + month + '-' + day;
+        document.getElementById("myDate").setAttribute("max", maxDate);
+    });
+</script>
 </body>
 
 </html>

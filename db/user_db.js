@@ -23,8 +23,8 @@ function createUser(){
         "Gender varchar(10)," +
         "ID_Proof_Type varchar(100) NOT NULL,"+
         "ID_Proof_Number varchar(200) NOT NULL,"+
-        "CHECK (Gender IN (\'M\',\'F\',\'Other\'))," +
-        "CHECK (Date_Of_Birth < CURDATE()))"
+    //    "CHECK (Gender IN (\'M\',\'F\',\'Other\'))," +
+        "CHECK (DATE(Date_Of_Birth) < DATE(NOW()))"
     connection.query(query,
             function(err,results,fields){
                 console.log(err)
@@ -36,9 +36,8 @@ function createUser(){
 }
 
 function adduser(fn,ln,un,p,e,d,a,g,idp,idn, callback) {
-
+            console.log(d)
             connection.query(`insert into user (FirstName,LastName,Username,Password,Email_id,Date_of_Birth,Address,Gender,ID_Proof_Type,ID_Proof_Number) values ('${fn}','${ln}','${un}','${p}','${e}','${d}','${a}','${g}','${idp}','${idn}') `, function(err, data) {
-                console.log("ERROR");
                 console.log(err);
                 callback(data);
             })

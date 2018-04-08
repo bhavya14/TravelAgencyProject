@@ -196,11 +196,34 @@ const connection = require('./models')
 //     })
 
 
+//
+// var query = "create table practice(first_name varchar(200) ,last_name varchar(200) ,modified Date)";
+// connection.query(query,
+//     function(err,results,fields){
+//         console.log(err)
+//         console.log(results)
+//         console.log(fields)
+//     })
 
-var query = "create table practice(first_name varchar(200) ,last_name varchar(200) ,modified Date)";
-connection.query(query,
-    function(err,results,fields){
-        console.log(err)
-        console.log(results)
-        console.log(fields)
-    })
+// // "Account_id varchar(255) UNIQUE NOT NULL," +
+// var query =
+//     "create table user(user_id int auto_increment PRIMARY KEY,"+
+//     "FirstName varchar(255) NOT NULL,"+
+//     "LastName varchar(255)," +
+//     "Username varchar(255) NOT NULL,"+
+//     "Password varchar(30) NOT NULL," +
+//     "Email_id varchar(255) NOT NULL," +
+//     "Date_Of_Birth Date NOT NULL," +
+//     "Address varchar(255) NOT NULL," +
+//     "Gender varchar(10)," +
+//     "ID_Proof_Type varchar(100) NOT NULL,"+
+//     "ID_Proof_Number varchar(200) NOT NULL,"+
+//     "CHECK (DATE(Date_Of_Birth) < DATE(NOW())))";
+//     connection.query(query,
+//     function(err,results,fields){
+//         console.log(err)
+//         console.log(results)
+//         console.log(fields)
+//     }
+//
+// )
