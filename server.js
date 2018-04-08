@@ -14,8 +14,6 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.post("/profile" ,function(req,res){ // User Page
     console.log(req.body.password);
-
-
     db.display(req.body.username,'*',req.body.password,function(data){
         console.log("Data is");
         console.log(data);
@@ -53,20 +51,13 @@ app.post('/booking',function (req,res) {
     res.render('pages/booking', {
 
     });
-
-
 })
 
 app.post('/signup',function (req,res) {
-
-
     res.render('pages/userdetails', {});
 });
 
-
-
-
-    app.post('/userdetails',function (req,res) {
+app.post('/userdetails',function (req,res) {
    //  udb.createUser();
 console.log("LALALLALA");
 console.log(req.body);
@@ -90,27 +81,20 @@ db.UsernameCheck(req.body.uname,function (data) {
         }
         // When doesnt match data.length==0
     });
-
-
-
-
-
     });
-
-
-
-
     // bdb.add(req.body.source,req.body.dest,req.body.myDate,function (data) {
     //     console.log("Added a booking");
     // });
-
-
-
-
 app.get("/",function(req,res){
-
     res.render('pages/index')
 });
+
+app.post('/bookingForm',function (req,res) {
+    res.render('pages/BookingForm',{
+        name:req.body.name,
+    });
+})
+
 app.listen(3000, function() {
     console.log("Running on 3000");
     db.connect();

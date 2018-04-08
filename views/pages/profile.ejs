@@ -3,20 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>LoggedIN</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script type = "text/JavaScript">
+        $(document).ready(function () {
+            console.log("in here")
+            $("#booking").click (function () {
+                console.log("in here too");
+                post('/bookingForm/', {name:$("h1").text()});
+            })
+        })
+
+        function post(path, params, method) {
+            method = method || "post"; // Set method to post by default if not specified.
+
+            // The rest of this code assumes you are not using a library.
+            // It can be made less wordy if you use one.
+            var form = document.createElement("form");
+            form.setAttribute("method", method);
+            form.setAttribute("action", path);
+
+            for(var key in params) {
+                if(params.hasOwnProperty(key)) {
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", key);
+                    hiddenField.setAttribute("value", params[key]);
+
+                    form.appendChild(hiddenField);
+                }
+            }
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+
 </head>
 <body>
+
+
 <h1><%= name%> <span><%= last_name %></span></h1>
+<input type = "button" id = "booking" value = "Make A Booking" />
 
-<form action="/booking" method="post" id="form">
-    <label><b>Source</b></label>
-    <input type="text" placeholder="Source" name="source" id="source" required>
-    <label><b>Destination</b></label>
-    <input type="text" placeholder="Destination" name="dest" id="dest" required>
-    Journey date
-    <input type="date" id="myDate" required>
-
-
-    <button type="submit" id="submit" value="Book">Check availability</button>
-</form>
 </body>
 </html>

@@ -1,10 +1,10 @@
 {
   "name": "untitled2",
   "version": "1.0.0",
-  "description": "",
   "main": "models.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +15,14 @@
     "express": "^4.16.3",
     "mysql2": "^1.5.3",
     "socket.io": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhavya14/TravelAgencyProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bhavya14/TravelAgencyProject/issues"
+  },
+  "homepage": "https://github.com/bhavya14/TravelAgencyProject#readme",
+  "description": ""
 }
