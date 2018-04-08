@@ -10,7 +10,11 @@
             console.log("in here")
             $("#booking").click (function () {
                 console.log("in here too");
-                post('/bookingForm/', {name:$("h1").text()});
+                post('/bookingForm/', {name:$("#name").text()});
+            })
+
+            $("#history").click(function(){
+                post('/UserHistory/', {username:$("#user").text()});
             })
         })
 
@@ -42,8 +46,10 @@
 <body>
 
 
-<h1><%= name%> <span><%= last_name %></span></h1>
+<h1 id="name"><%= name%> <span><%= last_name %></span></h1>
+<h1 id="user"><%= username%></h1>
 <input type = "button" id = "booking" value = "Make A Booking" />
+<input type = "button" id = "history" value = "History" />
 
 </body>
 </html>

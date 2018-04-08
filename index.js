@@ -73,27 +73,27 @@ const connection = require('./models')
 // )
 //
 
-// var query =
-//     "create table Bookings(Bid int PRIMARY KEY,"+
-//     "Eid int REFERENCES employee(Eid)," +
-//     "user_id int REFERENCES user(user_id),"+
-//     "Package_code int REFERENCES Package(Pcode)," +
-//     "travel_to varchar(200) REFERENCES Place(Place_id)," +
-//     "PNR int NOT NULL," +
-//     "travel_from varchar(200)," +
-//     "Start_Date Date," +
-//     "End_Date Date," +
-//     "Payment varchar(20) REFERENCES Payments(Payment_ID)," +
-//     "Booking_date DATE," +
-//     "Hotel_ID varchar(30) REFERENCES Hotel(Hotel_ID))"
-// connection.query(query,
-//         function(err,results,fields){
-//             console.log(err)
-//             console.log(results)
-//             console.log(fields)
-//         }
-//
-// )
+var query =
+    "create table Bookings(Bid int PRIMARY KEY,"+
+    "Eid int REFERENCES employee(Eid)," +
+    "username varchar(200) REFERENCES user(Username),"+
+    "Package_code int REFERENCES Package(Pcode)," +
+    "travel_to varchar(200) REFERENCES Place(Place_id)," +
+    "PNR int NOT NULL," +
+    "travel_from varchar(200)," +
+    "Start_Date Date," +
+    "End_Date Date," +
+    "Payment varchar(20) REFERENCES Payments(Payment_ID)," +
+    "Booking_date DATE," +
+    "Hotel_ID varchar(30) REFERENCES Hotel(Hotel_ID))"
+connection.query(query,
+        function(err,results,fields){
+            console.log(err)
+            console.log(results)
+            console.log(fields)
+        }
+
+)
 // var query =
 //     "create table Bookings(Bid int PRIMARY KEY,"+
 //     "Eid int REFERENCES employee(Eid)," +
@@ -205,7 +205,7 @@ const connection = require('./models')
 //         console.log(fields)
 //     })
 
-// // "Account_id varchar(255) UNIQUE NOT NULL," +
+// "Account_id varchar(255) UNIQUE NOT NULL," +
 // var query =
 //     "create table user(user_id int auto_increment PRIMARY KEY,"+
 //     "FirstName varchar(255) NOT NULL,"+

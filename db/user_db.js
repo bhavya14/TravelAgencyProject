@@ -42,8 +42,23 @@ function adduser(fn,ln,un,p,e,d,a,g,idp,idn, callback) {
                 callback(data);
             })
 }
+
+function display(id,query,password,callback) {
+    connection.query('select * from user where Username = ' + "\"" + id + "\" AND Password = " + password + ";", function(err,data) {
+        console.log("data : " , data)
+        console.log("error : ",err)
+        callback(data);
+    });
+}
+function UsernameCheck(fname,callback) {
+    connection.query(`select Username from user WHERE user.Username='${fname}'`, function(err,data) {
+        callback(data);
+    });
+}
 module.exports = {
     createUser:createUser,
     connect: Connect,
-    adduser:adduser
+    adduser:adduser,
+    display:display,
+    UsernameCheck:UsernameCheck
 }

@@ -14,7 +14,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.post("/profile" ,function(req,res){ // User Page
     console.log(req.body.password);
-    db.display(req.body.username,'*',req.body.password,function(data){
+    udb.display(req.body.username,'*',req.body.password,function(data){
         console.log("Data is");
         console.log(data);
         if(data==undefined)
@@ -32,8 +32,9 @@ app.post("/profile" ,function(req,res){ // User Page
         }
         else {
             res.render('pages/profile', {
-                name: data[0].first_name,
-                last_name : data[0].last_name
+                name:data[0].FirstName,
+                last_name : data[0].LastName,
+                username:data[0].Username
             });
         }
     })
@@ -63,7 +64,7 @@ console.log("LALALLALA");
 console.log(req.body);
 console.log(req.body.fname);
 
-db.UsernameCheck(req.body.uname,function (data) {
+udb.UsernameCheck(req.body.uname,function (data) {
         console.log("Data to be checked is")
         console.log(data);
         if(data.length==0)
@@ -96,6 +97,19 @@ app.post('/bookingForm',function (req,res) {
 })
 app.post('/BookingSubmit' , function(req,res){
 
+})
+
+app.post('/UserHistory',function(req,res){
+    var username = req.body.username;
+    console.log(username);
+    bdb.displayUserHistory(username,function (data) {
+        console.log("coming back");
+        console.log(data);
+        res.render('pages/history',{
+            username:username,
+            data: data
+        })
+    })
 })
 
 app.listen(3000, function() {

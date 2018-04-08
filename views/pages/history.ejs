@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>History <%= username%></title>
+</head>
+<body>
+<table>
+    <% for(var i=0; i < data.length; i++) { %>
+    <tr>
+        <td><%= data[i].Bid %></td>
+        <td><%= data[i].travel_to %></td>
+        <td><%= data[i].travel_from %></td>
+    </tr>
+    <% } %>
+</table>
+</body>
+</html>

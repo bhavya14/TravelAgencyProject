@@ -79,9 +79,17 @@ function display() {
 
     });
 }
+
+function displayUserHistory(username,callback){
+    connection.query(`select * from Bookings where Username = "${username}"`, function(err,data) {
+        console.log(data);
+        callback(data);
+    });
+}
 module.exports = {
     createtable:createtables,
     connect: Connect,
     display: display,
-    add: add
+    add: add,
+    displayUserHistory: displayUserHistory
 }
