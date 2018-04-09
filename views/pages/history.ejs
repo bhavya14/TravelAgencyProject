@@ -6,13 +6,24 @@
 </head>
 <body>
 <table>
-    <% for(var i=0; i < data.length; i++) { %>
+    <% for(var i=0; i < Bookings.length; i++) { %>
     <tr>
-        <td><%= data[i].Bid %></td>
-        <td><%= data[i].travel_to %></td>
-        <td><%= data[i].travel_from %></td>
+        <td><%= Bookings[i].Bid %></td>
+        <td><%= Bookings[i].travel_to %></td>
+        <td><%= Bookings[i].travel_from %></td>
     </tr>
-    <% } %>
+    <tr>
+
+        <% for(var j=0 ; j<data.length;j++) { %>
+        <% if (data[j].Bid == Bookings[i].Bid ){%>
+        <td><%= data[j].name%></td>
+        <td><%= data[j].age%></td>
+        <td><%= data[j].id_proof_number %></td>
+    </tr>
+    <% }%>
+    <%}%>
+    <%}%>
+
 </table>
 </body>
 </html>

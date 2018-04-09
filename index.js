@@ -73,27 +73,27 @@ const connection = require('./models')
 // )
 //
 
-var query =
-    "create table Bookings(Bid int PRIMARY KEY,"+
-    "Eid int REFERENCES employee(Eid)," +
-    "username varchar(200) REFERENCES user(Username),"+
-    "Package_code int REFERENCES Package(Pcode)," +
-    "travel_to varchar(200) REFERENCES Place(Place_id)," +
-    "PNR int NOT NULL," +
-    "travel_from varchar(200)," +
-    "Start_Date Date," +
-    "End_Date Date," +
-    "Payment varchar(20) REFERENCES Payments(Payment_ID)," +
-    "Booking_date DATE," +
-    "Hotel_ID varchar(30) REFERENCES Hotel(Hotel_ID))"
-connection.query(query,
-        function(err,results,fields){
-            console.log(err)
-            console.log(results)
-            console.log(fields)
-        }
-
-)
+// var query =
+//     "create table Bookings(Bid int PRIMARY KEY,"+
+//     "Eid int REFERENCES employee(Eid)," +
+//     "username varchar(200) REFERENCES user(Username),"+
+//     "Package_code int REFERENCES Package(Pcode)," +
+//     "travel_to varchar(200) REFERENCES Place(Place_id)," +
+//     "PNR int NOT NULL," +
+//     "travel_from varchar(200)," +
+//     "Start_Date Date," +
+//     "End_Date Date," +
+//     "Payment varchar(20) REFERENCES Payments(Payment_ID)," +
+//     "Booking_date DATE," +
+//     "Hotel_ID varchar(30) REFERENCES Hotel(Hotel_ID))"
+// connection.query(query,
+//         function(err,results,fields){
+//             console.log(err)
+//             console.log(results)
+//             console.log(fields)
+//         }
+//
+// )
 // var query =
 //     "create table Bookings(Bid int PRIMARY KEY,"+
 //     "Eid int REFERENCES employee(Eid)," +
@@ -227,3 +227,24 @@ connection.query(query,
 //     }
 //
 // )
+
+var query=
+    "create table Booking_member(Bid int REFERENCES Bookings,"+
+    "proof_type varchar(100), " +
+    "id_proof_number int,"+
+    "name varchar(100)," +
+    "age int," +
+    "CONSTRAINT fk_id  FOREIGN KEY (Bid)  REFERENCES Bookings(Bid))"
+connection.query(query,
+    function(err,results,fields){
+        console.log(err)
+
+    })
+
+connection.query(query,
+    function(err,results,fields){
+        console.log("Table created");
+        // console.log(err)
+        // console.log(results)
+        // console.log(fields)
+    })

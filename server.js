@@ -6,6 +6,7 @@ var path = require('path');
 var db = require('./db/db');
 var bdb=require('./db/booking_db');
 var udb=require('./db/user_db');
+var connection = require("./models");
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
@@ -94,23 +95,65 @@ app.post('/bookingForm',function (req,res) {
     res.render('pages/BookingForm',{
         name:req.body.name,
     });
-})
+});
 app.post('/BookingSubmit' , function(req,res){
 
-})
-
+});
 app.post('/UserHistory',function(req,res){
     var username = req.body.username;
     console.log(username);
-    bdb.displayUserHistory(username,function (data) {
-        console.log("coming back");
+    var Bookings;
+    var query  = `select distinct(Bid),travel_to,travel_from from Bookings where username = "${username}"`;
+    connection.query(query , function(err,data){
+        Bookings = data;
+        console.log(Bookings);
+    })
+
+    var query = `select Bid,name,age,id_proof_number from Bookings join Booking_member using (Bid) where Bookings.username = "${username}" `;
+    connection.query(query , function(err,data) {
+        console.log(err)
         console.log(data);
+        console.log(Bookings);
         res.render('pages/history',{
             username:username,
-            data: data
+            data: data,
+            Bookings :Bookings
         })
     })
-})
+
+
+    // var query = `select name,age,id_proof_number, from (user join Bookings using (username)) join Booking_member using (Bid) where user.Username = "${username}" `;
+    // connection.query(query , function(err,data) {
+    //     //callback(data);
+    //     console.log(data);
+    //     console.log(Bookings);
+    //     res.render('pages/history',{
+    //         username:username,
+    //         data: data,
+    //         Bookings :Bookings
+    //     })
+    // })
+
+    // var query = `select Bid from (user join Bookings using (username)) where user.Username = "${username}" `;
+    // connection.query(query , function(err,data) {
+    //     //callback(data);
+    //     console.log(data);
+    // })
+    //
+    // var query = `select * from Booking_member where Bid IN (select Bid from (user join Bookings using (username)) where user.Username = "${username}") `;
+    // connection.query(query , function(err,data) {
+    //     //callback(data);
+    //     console.log(data);
+    // })
+
+    // bdb.displayUserHistory(username,function (data) {
+    //     console.log(data);
+    //     res.render('pages/history',{
+    //         username:username,
+    //         data: data
+    //     })
+    // })
+});
 
 app.listen(3000, function() {
     console.log("Running on 3000");
