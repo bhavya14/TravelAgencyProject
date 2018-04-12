@@ -227,24 +227,65 @@ const connection = require('./models')
 //     }
 //
 // )
-
+//
 var query=
     "create table Booking_member(Bid int REFERENCES Bookings,"+
     "proof_type varchar(100), " +
     "id_proof_number int,"+
     "name varchar(100)," +
     "age int," +
-    "CONSTRAINT fk_id  FOREIGN KEY (Bid)  REFERENCES Bookings(Bid))"
+    "CONSTRAINT fk_id  FOREIGN KEY (Bid)  REFERENCES Bookings(Bid))";
 connection.query(query,
     function(err,results,fields){
         console.log(err)
 
     })
 
+
+var query=
+    "create table Flight(Bid int ,"+
+    "Start_date Date, " +
+    "Reach_date Date,"+
+    "Flight_Number varchar(200)," +
+    "Class varchar(200)," +
+    "Airport_start varchar(250)," +
+    "Airport_land varchar(250)," +
+    "Duration int(17)," +
+    "CONSTRAINT flight_bid  FOREIGN KEY (Bid)  REFERENCES Bookings(Bid))";
 connection.query(query,
     function(err,results,fields){
-        console.log("Table created");
-        // console.log(err)
-        // console.log(results)
-        // console.log(fields)
-    })
+        console.log(err)
+
+    });
+ query=
+    "create table Train(Bid int ,"+
+    "Start_date Date, " +
+    "Reach_date Date,"+
+    "Train_Number varchar(200)," +
+    "Class varchar(200)," +
+    "RailwayStation_start varchar(250)," +
+    "RailwayStation_reach varchar(250)," +
+     "Duration int(17)," +
+    "CONSTRAINT train_bid  FOREIGN KEY (Bid)  REFERENCES Bookings(Bid))";
+connection.query(query,
+    function(err,results,fields){
+        console.log(err)
+
+    });
+
+var query=
+    "create table Bus(Bid int ,"+
+    "Start_date Date, " +
+    "Reach_date Date,"+
+    "Bus_Number varchar(200)," +
+    "Class varchar(200)," +
+    "BusStop_start varchar(250)," +
+    "BusStop_reach varchar(250)," +
+    "Duration int(17)," +
+    "CONSTRAINT bus_bid  FOREIGN KEY (Bid)  REFERENCES Bookings(Bid))";
+connection.query(query,
+    function(err,results,fields){
+        console.log(err)
+
+    });
+

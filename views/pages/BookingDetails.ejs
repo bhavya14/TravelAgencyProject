@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged in</title>
+</head>
+<body>
+    <div style="border: solid ; border-color: beige ;padding: 10% ;margin-left: 10%; float: left">
+        <table>
+            <tr>
+                <td> Bid </td>
+                <td> Source</td>
+                <td> Destination</td>
+                <td> Date</td>
+            </tr>
+            <tr>
+               <td> <%= data.Bid%></td>
+                <td><%= data.source%></td>
+                <td><%= data.dest%></td>
+                <td><%= data.startDate%></td>
+            </tr>
+        </table>
+        <% if(data.travelMode == 1){ %>
+             <h3>Flight details</h3>
+             <h4>onward journey</h4>
+        <table>
+            <tr>
+                <td> Flight number </td>
+                <td> Departure from</td>
+                <td> Arrival At</td>
+                <td> Date and Time of Departure </td>
+                <td> Duration </td>
+            </tr>
+            <tr>
+                <td> <%= Details.Flight_Number%></td>
+                <td><%= Details.Airport_start%></td>
+                <td><%= Details.Airport_land%></td>
+                <td><%= Details.startDate%></td>
+                <td><%= Details.duration%></td>
+            </tr>
+            <tr>
+                <td> <%= ReturnDetails.Flight_Number%></td>
+                <td><%= ReturnDetails.Airport_start%></td>
+                <td><%= ReturnDetails.Airport_land%></td>
+                <td><%= ReturnDetails.startDate%></td>
+                <td><%= ReturnDetails.duration%></td>
+            </tr>
+        </table>
+        <% }%>
+        <h3> Train details</h3>
+        <h3>Bus details</h3>
+
+
+    </div>
+</body>
+</html>

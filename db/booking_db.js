@@ -65,11 +65,17 @@ function bookingmember() {
 
 }
 
-function add(source, destination,startdate, callback) {
+function add(source, destination,startdate,username, callback) {
 
-connection.query(`insert into Bookings (travel_from,travel to,start_date,PNR) values ('${source}',${destination}',${startdate}',1) `, function(err, data) {
-console.log("Below")
-        callback(data);
+    console.log(startdate)
+
+    connection.query(`insert into Bookings (travel_from,travel_to,PNR,username) values ('${source}','${destination}',1,'${username}') `, function(err,data) {
+       if(err ==null ) {
+            callback(data.insertId);
+       }
+       else{
+
+       }
     })
 }
 

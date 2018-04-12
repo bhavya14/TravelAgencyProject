@@ -39,7 +39,11 @@ function adduser(fn,ln,un,p,e,d,a,g,idp,idn, callback) {
             console.log(d)
             connection.query(`insert into user (FirstName,LastName,Username,Password,Email_id,Date_of_Birth,Address,Gender,ID_Proof_Type,ID_Proof_Number) values ('${fn}','${ln}','${un}','${p}','${e}','${d}','${a}','${g}','${idp}','${idn}') `, function(err, data) {
                 console.log(err);
-                callback(data);
+                if(err == null) {
+                    callback(data);
+                }else{
+                    console.log("some error occurred");
+                }
             })
 }
 

@@ -10,7 +10,7 @@
             console.log("in here")
             $("#booking").click (function () {
                 console.log("in here too");
-                post('/bookingForm/', {name:$("#name").text()});
+                post('/bookingForm/', {name:$("#name").text(),username : $("#user").text()});
             })
 
             $("#history").click(function(){

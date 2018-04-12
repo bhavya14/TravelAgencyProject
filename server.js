@@ -7,6 +7,7 @@ var db = require('./db/db');
 var bdb=require('./db/booking_db');
 var udb=require('./db/user_db');
 var connection = require("./models");
+var flight  = require("./db/flight");
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
@@ -44,16 +45,39 @@ app.post("/profile" ,function(req,res){ // User Page
 
 app.post('/booking',function (req,res) {
 
-    bdb.createtable();
-    var data=req;
+    var data=req.body;
+    var Bid;
+    console.log("form data : ", data);
+    bdb.add(req.body.source,req.body.dest,req.body.startDate,req.query.name ,function (bid) {
+        console.log("Added a booking");
+        Bid = bid;
+        console.log(Bid);
+        if(data.travelMode == 1){
+            // flight selected
+            console.log("inside :" , data);
 
-     // bdb.add(req.body.source,req.body.dest,req.body.myDate,function (data) {
-     //     console.log("Added a booking");
-     // });
-    res.render('pages/booking', {
+            flight.addFlight(data, Bid,function(FlightData){
+                Details =FlightData[0];
+                ReturnDetails = FlightData[1];
+                console.log( "data : ",FlightData);
+                console.log(FlightData[1]);
 
+                res.render('pages/BookingDetails',{
+                    data:data,
+                    Bid:Bid,
+                    Details:Details,
+                    ReturnDetails : ReturnDetails
+                })
+            })
+        }else if(data.travelMode == 2){
+            //train selected
+
+
+        }else{
+
+        }
     });
-})
+    })
 
 app.post('/signup',function (req,res) {
     res.render('pages/userdetails', {});
@@ -66,16 +90,21 @@ console.log(req.body);
 console.log(req.body.fname);
 
 udb.UsernameCheck(req.body.uname,function (data) {
-        console.log("Data to be checked is")
-        console.log(data);
+        // console.log("Data to be checked is")
+        // console.log(data);
         if(data.length==0)
         {
             udb.adduser(req.body.fname, req.body.lname,req.body.uname,req.body.password,req.body.mail,req.body.dob,req.body.address,req.body.Gender,req.body.proof,req.body.nproof,function (data) {
+                res.render('pages/profile',{
+                    name:req.body.fname,
+                    last_name : req.body.lname,
+                    username:req.body.uname
+                })
                 console.log("Done")
             })
         }
         else
-        { console.log("This username is already taken");
+        { //console.log("This username is already taken");
             res.send({
                 "code":400,
                 "failed":"This username is already taken"
@@ -87,6 +116,7 @@ udb.UsernameCheck(req.body.uname,function (data) {
     // bdb.add(req.body.source,req.body.dest,req.body.myDate,function (data) {
     //     console.log("Added a booking");
     // });
+
 app.get("/",function(req,res){
     res.render('pages/index')
 });
@@ -94,14 +124,12 @@ app.get("/",function(req,res){
 app.post('/bookingForm',function (req,res) {
     res.render('pages/BookingForm',{
         name:req.body.name,
+        username : req.body.username
     });
 });
-app.post('/BookingSubmit' , function(req,res){
 
-});
 app.post('/UserHistory',function(req,res){
     var username = req.body.username;
-    console.log(username);
     var Bookings;
     var query  = `select distinct(Bid),travel_to,travel_from from Bookings where username = "${username}"`;
     connection.query(query , function(err,data){
@@ -111,9 +139,6 @@ app.post('/UserHistory',function(req,res){
 
     var query = `select Bid,name,age,id_proof_number from Bookings join Booking_member using (Bid) where Bookings.username = "${username}" `;
     connection.query(query , function(err,data) {
-        console.log(err)
-        console.log(data);
-        console.log(Bookings);
         res.render('pages/history',{
             username:username,
             data: data,

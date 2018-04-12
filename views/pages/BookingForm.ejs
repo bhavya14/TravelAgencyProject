@@ -6,13 +6,22 @@
 </head>
 <body>
 <h1><%= name%></h1>
-<form action="/booking" method="post" id="form">
+<form action="/booking?name= <%= username%>" method="post" id="form">
     <label><b>Source</b></label>
     <input type="text" placeholder="Source" name="source" id="source" required>
     <label><b>Destination</b></label>
     <input type="text" placeholder="Destination" name="dest" id="dest" required>
-    Journey date
-    <input type="date" id="myDate" required>
+    <label>Start date </label>
+    <input type="date" id="myDate" name = "startDate" required >
+    <label><b>Return date</b> </label>
+    <input type="date" id="ReturnDate" name = "returnDate" required >
+
+    <label><b>Travel Mode</b></label>
+    <select id="Travel_mode" name = "travelMode">
+        <option value="1">Flight</option>
+        <option value="2">Train</option>
+        <option value="3">Bus</option>
+    </select>
     <button type="submit" id="submit" value="Book">Check availability</button>
 </form>
 </body>
