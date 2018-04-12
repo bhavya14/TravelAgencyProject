@@ -28,18 +28,8 @@ var query=
     connection.query(query,
         function(err,results,fields){
             console.log(err)
-
         }
-
     )
-   //var query= "create table abc(Bid int auto_increment , Eid int REFERENCES employee(Eid),user_id int REFERENCES user(user_id),Package_code int REFERENCES Package(Pcode),travel_to varchar(200) REFERENCES Place(Place_id),PNR int NOT NULL,travel_from varchar(200),start_date Date,End_Date Date,Payment varchar(20) REFERENCES Payments(Payment_ID),booking_date DATE,Hotel_ID varchar(30) REFERENCES Hotel(Hotel_ID)),primary key(Bid)";
-    connection.query(query,
-        function(err,results,fields){
-        console.log("Table created");
-        // console.log(err)
-            // console.log(results)
-            // console.log(fields)
-        })
 }
 
 function bookingmember() {
@@ -65,11 +55,11 @@ function bookingmember() {
 
 }
 
-function add(source, destination,startdate,username, callback) {
+function add(source, destination,startdate,returnDate,username, callback) {
 
     console.log(startdate)
 
-    connection.query(`insert into Bookings (travel_from,travel_to,PNR,username) values ('${source}','${destination}',1,'${username}') `, function(err,data) {
+    connection.query(`insert into Bookings (travel_from,travel_to,PNR,username, Start_date,End_date) values ('${source}','${destination}',1,'${username}','${startdate}','${returnDate}') `, function(err,data) {
        if(err ==null ) {
             callback(data.insertId);
        }

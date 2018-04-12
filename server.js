@@ -48,7 +48,7 @@ app.post('/booking',function (req,res) {
     var data=req.body;
     var Bid;
     console.log("form data : ", data);
-    bdb.add(req.body.source,req.body.dest,req.body.startDate,req.query.name ,function (bid) {
+    bdb.add(req.body.source,req.body.dest,req.body.startDate,req.body.returnDate ,req.query.name ,function (bid) {
         console.log("Added a booking");
         Bid = bid;
         console.log(Bid);

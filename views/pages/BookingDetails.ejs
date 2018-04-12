@@ -6,7 +6,7 @@
 </head>
 <body>
     <div style="border: solid ; border-color: beige ;padding: 10% ;margin-left: 10%; float: left">
-        <table>
+        <table cellpadding="10">
             <tr>
                 <td> Bid </td>
                 <td> Source</td>
@@ -22,9 +22,9 @@
         </table>
         <% if(data.travelMode == 1){ %>
              <h3>Flight details</h3>
-             <h4>onward journey</h4>
-        <table>
+        <table cellpadding="10">
             <tr>
+                <td></td>
                 <td> Flight number </td>
                 <td> Departure from</td>
                 <td> Arrival At</td>
@@ -32,25 +32,83 @@
                 <td> Duration </td>
             </tr>
             <tr>
+                <td><b> Onward Journey </b></td>
                 <td> <%= Details.Flight_Number%></td>
                 <td><%= Details.Airport_start%></td>
                 <td><%= Details.Airport_land%></td>
-                <td><%= Details.startDate%></td>
-                <td><%= Details.duration%></td>
+                <td><%= Details.Start_date%></td>
+                <td><%= Details.Duration%></td>
             </tr>
             <tr>
+                <td><b>Return Journey</b></td>
                 <td> <%= ReturnDetails.Flight_Number%></td>
                 <td><%= ReturnDetails.Airport_start%></td>
                 <td><%= ReturnDetails.Airport_land%></td>
-                <td><%= ReturnDetails.startDate%></td>
-                <td><%= ReturnDetails.duration%></td>
+                <td><%= ReturnDetails.Start_date%></td>
+                <td><%= ReturnDetails.Duration%></td>
             </tr>
         </table>
         <% }%>
-        <h3> Train details</h3>
-        <h3>Bus details</h3>
 
+        <% if(data.travelMode == 2){ %>
+        <h3>Train details</h3>
+        <table cellpadding="10">
+            <tr>
+                <td></td>
+                <td> Flight number </td>
+                <td> Departure from</td>
+                <td> Arrival At</td>
+                <td> Date and Time of Departure </td>
+                <td> Duration </td>
+            </tr>
+            <tr>
+                <td><b> Onward Journey </b></td>
+                <td> <%= Details.Flight_Number%></td>
+                <td><%= Details.Airport_start%></td>
+                <td><%= Details.Airport_land%></td>
+                <td><%= Details.Start_date%></td>
+                <td><%= Details.Duration%></td>
+            </tr>
+            <tr>
+                <td><b>Return Journey</b></td>
+                <td> <%= ReturnDetails.Flight_Number%></td>
+                <td><%= ReturnDetails.Airport_start%></td>
+                <td><%= ReturnDetails.Airport_land%></td>
+                <td><%= ReturnDetails.Start_date%></td>
+                <td><%= ReturnDetails.Duration%></td>
+            </tr>
+        </table>
+        <% }%>
 
+        <% if(data.travelMode == 3){ %>
+        <h3>Train details</h3>
+        <table cellpadding="10">
+            <tr>
+                <td></td>
+                <td> Flight number </td>
+                <td> Departure from</td>
+                <td> Arrival At</td>
+                <td> Date and Time of Departure </td>
+                <td> Duration </td>
+            </tr>
+            <tr>
+                <td><b> Onward Journey </b></td>
+                <td> <%= Details.Flight_Number%></td>
+                <td><%= Details.Airport_start%></td>
+                <td><%= Details.Airport_land%></td>
+                <td><%= Details.Start_date%></td>
+                <td><%= Details.Duration%></td>
+            </tr>
+            <tr>
+                <td><b>Return Journey</b></td>
+                <td> <%= ReturnDetails.Flight_Number%></td>
+                <td><%= ReturnDetails.Airport_start%></td>
+                <td><%= ReturnDetails.Airport_land%></td>
+                <td><%= ReturnDetails.Start_date%></td>
+                <td><%= ReturnDetails.Duration%></td>
+            </tr>
+        </table>
+        <% }%>
     </div>
 </body>
 </html>
