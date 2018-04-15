@@ -15,9 +15,9 @@
             </tr>
             <tr>
                <td> <%= data.Bid%></td>
-                <td><%= data.source%></td>
-                <td><%= data.dest%></td>
-                <td><%= data.startDate%></td>
+                <td><%= data.source%><%= data.travel_from%></td>
+                <td><%= data.dest%><%= data.travel_to%></td>
+                <td><%= data.startDate%><%= data.Start_Date%></td>
             </tr>
         </table>
         <% if(data.travelMode == 1){ %>
@@ -55,7 +55,7 @@
         <table cellpadding="10">
             <tr>
                 <td></td>
-                <td> Flight number </td>
+                <td> Train number </td>
                 <td> Departure from</td>
                 <td> Arrival At</td>
                 <td> Date and Time of Departure </td>
@@ -63,17 +63,17 @@
             </tr>
             <tr>
                 <td><b> Onward Journey </b></td>
-                <td> <%= Details.Flight_Number%></td>
-                <td><%= Details.Airport_start%></td>
-                <td><%= Details.Airport_land%></td>
+                <td><%= Details.Train_Number%></td>
+                <td><%= Details.RailwayStation_start%></td>
+                <td><%= Details.RailwayStation_reach%></td>
                 <td><%= Details.Start_date%></td>
                 <td><%= Details.Duration%></td>
             </tr>
             <tr>
                 <td><b>Return Journey</b></td>
-                <td> <%= ReturnDetails.Flight_Number%></td>
-                <td><%= ReturnDetails.Airport_start%></td>
-                <td><%= ReturnDetails.Airport_land%></td>
+                <td> <%= ReturnDetails.Train_Number%></td>
+                <td><%= ReturnDetails.RailwayStation_start%></td>
+                <td><%= ReturnDetails.RailwayStation_reach%></td>
                 <td><%= ReturnDetails.Start_date%></td>
                 <td><%= ReturnDetails.Duration%></td>
             </tr>
@@ -81,11 +81,11 @@
         <% }%>
 
         <% if(data.travelMode == 3){ %>
-        <h3>Train details</h3>
+        <h3>Bus details</h3>
         <table cellpadding="10">
             <tr>
                 <td></td>
-                <td> Flight number </td>
+                <td> Bus number </td>
                 <td> Departure from</td>
                 <td> Arrival At</td>
                 <td> Date and Time of Departure </td>
@@ -93,17 +93,17 @@
             </tr>
             <tr>
                 <td><b> Onward Journey </b></td>
-                <td> <%= Details.Flight_Number%></td>
-                <td><%= Details.Airport_start%></td>
-                <td><%= Details.Airport_land%></td>
+                <td> <%= Details.Bus_number%></td>
+                <td><%= Details.BusStop_start%></td>
+                <td><%= Details.BusStop_reach%></td>
                 <td><%= Details.Start_date%></td>
                 <td><%= Details.Duration%></td>
             </tr>
             <tr>
                 <td><b>Return Journey</b></td>
-                <td> <%= ReturnDetails.Flight_Number%></td>
-                <td><%= ReturnDetails.Airport_start%></td>
-                <td><%= ReturnDetails.Airport_land%></td>
+                <td> <%= ReturnDetails.Bus_number%></td>
+                <td><%= ReturnDetails.BusStop_start%></td>
+                <td><%= ReturnDetails.BusStop_reach%></td>
                 <td><%= ReturnDetails.Start_date%></td>
                 <td><%= ReturnDetails.Duration%></td>
             </tr>

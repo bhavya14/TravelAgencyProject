@@ -31,11 +31,11 @@ function createTable(){
 
 function addTrain(data , bid,callback){
 
-    var query  = `insert into train(Bid,Train_number,RailwayStation_start ,RailwayStation_reach,Duration) values(${bid},'W78899','${data.source}', '${data.dest}',2 )`;
+    var query  = `insert into train(Bid,Train_number,RailwayStation_start ,RailwayStation_reach,Duration,Start_date) values(${bid},'W78899','${data.source}', '${data.dest}',2,'${data.startDate}')`;
     console.log(query);
     connection.query(query,function(err){
         console.log(err);
-        var queryReturn = `insert into train(Bid,Train_number,RailwayStation_start ,RailwayStation_reach,Duration) values(${bid},'L98799','${data.dest}','${data.source}',2)`;
+        var queryReturn = `insert into train(Bid,Train_number,RailwayStation_start ,RailwayStation_reach,Duration,Start_date) values(${bid},'L98799','${data.dest}','${data.source}',2,'${data.returnDate}')`;
         connection.query(queryReturn,function(err){
             console.log("err : ",err);
             var q = `select * from train where Bid = ${bid}`;

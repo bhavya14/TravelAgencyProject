@@ -31,11 +31,11 @@ function createTable(){
 
 function addBus(data , bid,callback){
 
-    var query  = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration) values(${bid},'W78899','${data.source}', '${data.dest}',2 )`;
+    var query  = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration,Start_date) values(${bid},'W78899','${data.source}', '${data.dest}',2,'${data.startDate}' )`;
     console.log(query);
     connection.query(query,function(err){
         console.log(err);
-        var queryReturn = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration) values(${bid},'L98799','${data.dest}','${data.source}',2)`;
+        var queryReturn = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration,Start_date) values(${bid},'L98799','${data.dest}','${data.source}',2,'${data.returnDate}')`;
         connection.query(queryReturn,function(err){
             console.log("err : ",err);
             var q = `select * from Bus where Bid = ${bid}`;

@@ -5,12 +5,16 @@
     <title>History <%= username%></title>
 </head>
 <body>
-<table>
+<table cellpadding="10">
     <% for(var i=0; i < Bookings.length; i++) { %>
     <tr>
         <td><%= Bookings[i].Bid %></td>
         <td><%= Bookings[i].travel_to %></td>
         <td><%= Bookings[i].travel_from %></td>
+        <td><form action = "/BookingDetailsInHistory?Booking= <%=Bookings[i].Bid%>" method = "post">
+                <input type="submit" name="Details" value="Details" />
+            </form>
+        </td>
     </tr>
     <tr>
 
