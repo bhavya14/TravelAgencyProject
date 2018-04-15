@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const ejs = require('ejs')
+const ejs = require('ejs');
 var bodyParser = require('body-parser');
 var path = require('path');
 var db = require('./db/db');
@@ -10,6 +10,9 @@ var connection = require("./models");
 var flight  = require("./db/flight");
 var train = require("./db/train");
 var bus = require("./db/Bus");
+var trigger = require("./db/triggers");
+var edb=require('./db/employee_db');
+var paydb=require('./db/payment_db');
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
@@ -50,7 +53,7 @@ app.post('/booking',function (req,res) {
     var data=req.body;
     var Bid;
     console.log("form data : ", data);
-    bdb.add(req.body.source,req.body.dest,req.body.startDate,req.body.returnDate ,req.query.name ,function (bid) {
+    bdb.add(req.body.source,req.body.dest,req.body.startDate,req.body.returnDate ,req.query.name ,Math.floor(Math.random()*222222),Math.floor(Math.random()*2),function (bid) {
         console.log("Added a booking");
         Bid = bid;
         console.log(Bid);
@@ -67,7 +70,9 @@ app.post('/booking',function (req,res) {
                     data:data,
                     Bid:Bid,
                     Details:Details,
-                    ReturnDetails : ReturnDetails
+                    ReturnDetails : ReturnDetails,
+                    name:req.query.name
+
                 })
             })
         }else if(data.travelMode == 2){
@@ -81,7 +86,9 @@ app.post('/booking',function (req,res) {
                     data:data,
                     Bid:Bid,
                     Details:Details,
-                    ReturnDetails : ReturnDetails
+                    ReturnDetails : ReturnDetails,
+                    name:req.query.name
+
                 })
             })
 
@@ -96,7 +103,9 @@ app.post('/booking',function (req,res) {
                     data:data,
                     Bid:Bid,
                     Details:Details,
-                    ReturnDetails : ReturnDetails
+                    ReturnDetails : ReturnDetails,
+                    name:req.query.name
+
                 })
             })
         }
@@ -233,4 +242,68 @@ app.post('/UserHistory',function(req,res){
 app.listen(3000, function() {
     console.log("Running on 3000");
     db.connect();
+    trigger.event1;
 });
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+app.post('/final',function (req,res) {
+    console.log("values in final are");
+    console.log(req.query.amount);
+    console.log(req.query.name);
+    console.log(req.body);
+    paydb.paymenttable();
+
+
+})
+app.post('/package',function (req,res) {
+
+    console.log(req.body);
+    console.log("I am inside packagee");
+    console.log(req.query.name);
+    var v=req.query.name;
+    res.render('pages/payment',{
+
+        name:v,
+        amount:parseInt(req.body.Package)
+    });
+
+
+
+})
+
+app.post("/eprofile",function (req,res) {
+    edb.display(req.body.username3,req.body.password3,function (data) {
+
+        if(data==undefined)
+        {  res.send({
+            "code":400,
+            "failed":"The employee account does not exist"
+        })
+        }
+        else if(data.length==0)
+        {
+            res.send({
+                "code":400,
+                "failed":"Incorrect password"
+            })
+        }
+        else {
+            res.render('pages/eprofile', {
+                ename: data[0].FirstName,
+                eid:data[0].Email_id,
+                lname:data[0].LastName,
+                wfrom:data[0].Working_from,
+                dob:data[0].Date_Of_Birth,
+                add:data[0].Address,
+                gen:datta[0].Gender,
+                aid:data[0].Account_id,
+                dept:data[0].Department
+
+            });
+        }
+    })
+
+})

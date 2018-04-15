@@ -3,6 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Logged in</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#gold').click(function () {
+                document.getElementById('pack').value="1000";
+            }) ;
+            $('#prem').click(function () {
+                document.getElementById('pack').value="2000";
+            });
+        })
+        //    $(document).ready(function(){
+        //
+        //        console.log("Package is");
+        //      $('#gold').click(function () {
+        //          document.getElementById('pack').value.set();
+        //      }) ;
+        //      $('#prem').click(function () {
+        //            document.getElementById('pack').value.set("2000");
+        //        });
+        //
+        //            console.log("in here")
+        //            $("#submit").click (function () {
+        //                console.log("in here too");
+        //                post('/package', {name:$("#pack").value
+        //                });
+        //            })
+        //        })
+        //
+        //        function post(path, params, method) {
+        //            method = method || "post"; // Set method to post by default if not specified.
+        //
+        //            // The rest of this code assumes you are not using a library.
+        //            // It can be made less wordy if you use one.
+        //            var form = document.createElement("form");
+        //            form.setAttribute("method", method);
+        //            form.setAttribute("action", path);
+        //
+        //            for(var key in params) {
+        //                if(params.hasOwnProperty(key)) {
+        //                    var hiddenField = document.createElement("input");
+        //                    hiddenField.setAttribute("type", "hidden");
+        //                    hiddenField.setAttribute("name", key);
+        //                    hiddenField.setAttribute("value", params[key]);
+        //
+        //                    form.appendChild(hiddenField);
+        //                }
+        //            }
+        //            document.body.appendChild(form);
+        //            form.submit();
+        //        }
+    </script>
 </head>
 <body>
     <div style="border: solid ; border-color: beige ;padding: 10% ;margin-left: 10%; float: left">
@@ -109,6 +164,21 @@
             </tr>
         </table>
         <% }%>
+        <form action="/package?name=<%=name%>" method="post" id="form">?    <h1>VIEW PACKAGES</h1>
+            <INPUT TYPE="Radio" Name="Package" Value="20000" id="G">Gold
+            <INPUT TYPE="Radio" Name="Package" Value="10000" id="P">Premium
+            <INPUT TYPE="Radio" Name="Package" Value="5000" id="S">Silver
+
+            VIEW HOTELS AT THE PLACE
+            *****
+            <button type="submit" id="submit">Make Payment</button>
+
+
+
+        </form>
+
+
+
     </div>
 </body>
 </html>

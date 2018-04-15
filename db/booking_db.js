@@ -55,10 +55,10 @@ function bookingmember() {
 
 }
 
-function add(source, destination,startdate,returnDate,username, callback) {
+function add(source, destination,startdate,returnDate,username, pnr,eid,callback) {
 
     console.log(startdate)
-    connection.query(`insert into Bookings (travel_from,travel_to,PNR,username, Start_date,End_date) values('${source}','${destination}',1,'${username}','${startdate}','${returnDate}') `, function(err,data) {
+    connection.query(`insert into Bookings (travel_from,travel_to,PNR,username, Start_date,End_date,Eid) values('${source}','${destination}',${pnr},'${username}','${startdate}','${returnDate}',${eid}) `, function(err,data) {
        if(err ==null ) {
             callback(data.insertId);
        }

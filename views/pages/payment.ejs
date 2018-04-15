@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged in</title>
+</head>
+<body>
+
+<h1><%=name%></h1>
+<!--Booking Profile-->
+
+<form action="/final?name=<%=name%>" method="post" id="form">
+    <INPUT TYPE="Radio" Name="Pay" Value="Credit" id="G"/>Credit Card
+    <INPUT TYPE="Radio" Name="Pay" Value="Debit" id="P"/>Debit Card
+
+    </br>
+    <label><b>Card Type</b></label>
+    <input type="text" placeholder="CardType" name="type" id="type" required>
+    </br>
+    <label><b>Card Number</b></label>
+    <input type="text" placeholder="CardNum" name="num" id="num" required>
+
+
+    </br>
+    <label><b>CVV</b></label>
+    <input type="text" placeholder="CVV" name="cvv" id="cvv" required>
+    </br>
+
+    <button type="submit" value="submit" id="submit">Submit</button>
+</form>
+
+
+</body>
+
+</html>
