@@ -80,10 +80,13 @@ function displayUserHistory(username,callback){
 
 
 function addMembers(originalData,Bid,callback){
-    console.log(originalData);
+
+    console.log(originalData)
+    if(Object.keys(originalData).length == 5){
+        console.log("going back")
+        callback();
+    }
     var i=0;
-    console.log((Object.keys(originalData).length -5 )/4);
-    console.log(originalData["Name" + i])
     for (  ;i< (Object.keys(originalData).length -5 )/4;i++){
         var key1 ="Name" + i;
         var key2 = "IDProofType" +i;
@@ -104,11 +107,33 @@ function addMembers(originalData,Bid,callback){
 
 
 }
+
+function fetchData(Bid,callback){
+    connection.query(`select* from Bookings where Bid = ${Bid}`,function(err,data){
+        if(err==null){
+            var query  = `(select Flight_Number as Flight_Number,null as Train_Number,null as Bus_number from Flight where Bid = ${Bid} ) 
+                        UNION ALL 
+                        (select null as Flight_Number,Train_Number as Train_Number,null as Bus_Number from Train where Bid = ${Bid}) 
+                        UNION ALL
+                        (select null as Flight_Number,null as Train_Number,Bus_Number as Bus_Number from Bus where Bid = ${Bid})`;
+            connection.query(query,function(err,travelData){
+                if(travelData[0].Flight_Number != null){
+                    travelMode = 1
+                }else if(travelData[0].Train_Number !=null)
+                    travelMode = 2
+                else
+                    travelMode=3
+                callback(travelMode,data)
+            })
+        }
+    })
+}
 module.exports = {
     createtable:createtables,
     connect: Connect,
     display: display,
     add: add,
     displayUserHistory: displayUserHistory,
-    addMembers:addMembers
+    addMembers:addMembers,
+    fetchData:fetchData
 }

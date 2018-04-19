@@ -30,7 +30,17 @@ function MakePaymenttable()
             console.log(fields)
         })
 }
-
+function addPayment(Bid , method , amount , callback){
+    var today = new Date();
+    var query = `insert into Payments values(${Bid},'${method}',${amount})`
+    connection.query(query,function(err){
+        if(err !=null)
+            console.log(err);
+        else
+            callback();
+    })
+}
 module.exports={
-    paymenttable: MakePaymenttable
+    paymenttable: MakePaymenttable,
+    addPayment:addPayment
 }

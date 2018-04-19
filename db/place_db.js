@@ -38,8 +38,18 @@ function allPlaces(callback){
             callback(data);
     })
 }
+
+function fetchPrice(source,destination,callback){
+    connection.query(`select* from master where source = "${source}" AND destination = "${destination}"` , function(err,data){
+        console.log("Price data : " , data)
+        if(err == null){
+            callback(data);
+        }
+    })
+}
 module.exports={
     placename:placename,
-    allPlaces:allPlaces
+    allPlaces:allPlaces,
+    fetchPrice : fetchPrice
 }
 

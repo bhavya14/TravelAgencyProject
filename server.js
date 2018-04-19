@@ -49,16 +49,11 @@ app.post("/profile" ,function(req,res){ // User Page
     })
 
 })
-
 app.post('/booking',function (req,res) {
 
     var originalData=req.body;
-   // console.log(Object.keys(originalData).length -5 );
     var username = req.query.name;
     var Bid;
-     console.log("form dataa : ", originalData);
-    // console.log(originalData.source);
-
     var ss;
     var dd;
     if(req.body.startDate>req.body.returnDate)
@@ -68,7 +63,12 @@ app.post('/booking',function (req,res) {
             "code":400,
             "failed":"Check return date"
         })
-    }else {
+    }else if(req.body.source == req.body.dest){
+        res.send({
+            "code":400,
+            "failed":"Source And Destination cannot be same "
+        })
+    } else {
 
         placedb.placename(req.body.source, function (data) {
             console.log(data);
@@ -106,7 +106,8 @@ app.post('/booking',function (req,res) {
                                             Bid: Bid,
                                             Details: Details,
                                             ReturnDetails: ReturnDetails,
-                                            name: req.query.name
+                                            name: req.query.name,
+                                            ShowPayment : true
                                         })
                                     })
                                 })
@@ -117,13 +118,17 @@ app.post('/booking',function (req,res) {
                                     console.log("data : ", TrainData);
                                     console.log(TrainData[1]);
 
-                                    res.render('pages/BookingDetails', {
-                                        data: originalData,
-                                        Bid: Bid,
-                                        Details: Details,
-                                        ReturnDetails: ReturnDetails,
-                                        name: req.query.name
+                                    bdb.addMembers(originalData, bid, function () {
+                                        console.log("in here after all additions")
+                                        res.render('pages/BookingDetails', {
+                                            data: originalData,
+                                            Bid: Bid,
+                                            Details: Details,
+                                            ReturnDetails: ReturnDetails,
+                                            name: req.query.name,
+                                            ShowPayment : true
 
+                                        })
                                     })
                                 })
 
@@ -134,13 +139,17 @@ app.post('/booking',function (req,res) {
                                     console.log("data : ", BusData);
                                     console.log(BusData[1]);
 
-                                    res.render('pages/BookingDetails', {
-                                        data: originalData,
-                                        Bid: Bid,
-                                        Details: Details,
-                                        ReturnDetails: ReturnDetails,
-                                        name: req.query.name
+                                    bdb.addMembers(originalData, bid, function () {
+                                        console.log("in here after all additions")
+                                        res.render('pages/BookingDetails', {
+                                            data: originalData,
+                                            Bid: Bid,
+                                            Details: Details,
+                                            ReturnDetails: ReturnDetails,
+                                            name: req.query.name,
+                                            ShowPayment : true
 
+                                        })
                                     })
                                 })
                             }
@@ -166,11 +175,7 @@ app.post('/booking',function (req,res) {
             }
         });
     }
-})
-
-
-
-
+});
 app.post('/BookingDetailsInHistory',function(req,res){
    var Bid = req.query.Booking;
    console.log(Bid);
@@ -204,7 +209,6 @@ app.post('/BookingDetailsInHistory',function(req,res){
         } )
    })
 });
-
 app.post('/signup',function (req,res) {
     res.render('pages/userdetails', {});
 });
@@ -360,14 +364,10 @@ app.post('/userdetails',function (req,res) {
     }
 
 });
-
-
 app.get("/",function(req,res){
     res.render('pages/index')
 });
-
 app.post('/bookingForm',function (req,res) {
-
     placedb.allPlaces(function(data){
         console.log(data.length);
         res.render('pages/BookingForm',{
@@ -376,10 +376,7 @@ app.post('/bookingForm',function (req,res) {
             data : data
         });
     })
-
-
 });
-
 function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -391,7 +388,6 @@ function formatDate(date) {
 
     return [year, month, day].join('-');
 }
-
 app.post('/UserHistory',function(req,res){
 
     var username = req.body.username;
@@ -463,20 +459,16 @@ app.listen(3000, function() {
     db.connect();
     trigger.event1;
 });
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
-
-app.post('/final',function (req,res) {
-    console.log("values in final are");
-    console.log(req.query.amount);
-    console.log(req.query.name);
-    console.log(req.body);
-    paydb.paymenttable();
-
-
-})
+// app.post('/final',function (req,res) {
+//     console.log("values in final are");
+//     console.log(req.query.amount);
+//     console.log(req.query.name);
+//     console.log(req.body);
+//     paydb.paymenttable();
+// });
 app.post('/package',function (req,res) {
 
     console.log(req.body);
@@ -491,8 +483,7 @@ app.post('/package',function (req,res) {
 
 
 
-})
-
+});
 app.post("/eprofile",function (req,res) {
     edb.display(req.body.username3,req.body.password3,function (data) {
 
@@ -525,4 +516,40 @@ app.post("/eprofile",function (req,res) {
         }
     })
 
+});
+
+app.post("/Pay" , function(req,res){
+    var Bid = req.query.Bid;
+    console.log("Bid : " ,Bid);
+    console.log("payments");
+    var price;
+    bdb.fetchData(Bid,function(travelMode , data){
+        console.log("data" ,data[0].travel_to ,data[0].travel_from);
+        placedb.fetchPrice(data[0].travel_from,data[0].travel_to,function(MasterData){
+            price = MasterData[0].Base_Price ;
+            if(travelMode ==1){
+                price += MasterData[0].duration * 100 ;
+            }else if(travelMode == 2){
+                price += (MasterData[0].duration + 10) * 5 ;
+            }else{
+                price += (MasterData[0].duration + 20)* 2 ;
+            }
+            res.render('pages/Payment',{
+                Bid : req.query.Bid,
+                price : price
+            })
+        })
+
+    })
+
+
+
 })
+
+app.post("/Payment",function(req,res){
+    var Bid = req.query.Bid;
+    console.log("Bid : " ,Bid);
+    paydb.addPayment(Bid,req.body.method,req.body.price,function(){
+        res.render('pages/Successful')
+    })
+});
