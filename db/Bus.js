@@ -35,16 +35,26 @@ function addBus(data , bid,callback){
     console.log(query);
     connection.query(query,function(err){
         console.log(err);
-        var queryReturn = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration,Start_date) values(${bid},'L98799','${data.dest}','${data.source}',2,'${data.returnDate}')`;
-        connection.query(queryReturn,function(err){
-            console.log("err : ",err);
+
+        if(data.returnDate!=null){
+            var queryReturn = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration,Start_date) values(${bid},'L98799','${data.dest}','${data.source}',2,'${data.returnDate}')`;
+            connection.query(queryReturn,function(err){
+                console.log("err : ",err);
+                var q = `select * from Bus where Bid = ${bid}`;
+                connection.query(q,function(err,data){
+                    console.log("Bus data : ", data)
+                    callback(data);
+                })
+
+            })
+        }else{
             var q = `select * from Bus where Bid = ${bid}`;
             connection.query(q,function(err,data){
                 console.log("Bus data : ", data)
                 callback(data);
             })
+        }
 
-        })
     })
 
 }

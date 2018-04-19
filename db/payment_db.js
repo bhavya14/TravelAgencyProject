@@ -14,7 +14,7 @@ function Connect() {
 function MakePaymenttable()
 {
     var query =
-        "create table Payment(Payment_ID int PRIMARY KEY,"+
+        "create table Payments(Payment_ID int PRIMARY KEY,"+
         "Booking_ID int REFERENCES Bookings(Bid)," +
         "Payment_Date DATE," +
         "type varchar(100)," +
@@ -32,7 +32,7 @@ function MakePaymenttable()
 }
 function addPayment(Bid , method , amount , callback){
     var today = new Date();
-    var query = `insert into Payments values(${Bid},'${method}',${amount})`
+    var query = `insert into Payments values(${Bid},'${method}',${amount})`;
     connection.query(query,function(err){
         if(err !=null)
             console.log(err);
