@@ -3,21 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>History <%= username%></title>
+
 </head>
 <body>
+
 <table cellpadding="10">
+
+
     <% for(var i=0; i < Bookings.length; i++) { %>
     <tr>
         <td><%= Bookings[i].Bid %></td>
         <td><%= Bookings[i].travel_to %></td>
         <td><%= Bookings[i].travel_from %></td>
+        <td><%= dataDate[i] %></td>
         <td><form action = "/BookingDetailsInHistory?Booking= <%=Bookings[i].Bid%>" method = "post">
                 <input type="submit" name="Details" value="Details" />
             </form>
         </td>
+        <% if(new Date(dataDate[i])>new Date('2018-04-19')) {%>
+        <td><form action = "/DeleteTheBooking?Booking= <%=Bookings[i].Bid%>" method = "post">
+                <input type="submit" name="delete" value="delete" />
+            </form>
+            <%}%>
     </tr>
     <tr>
-
         <% for(var j=0 ; j<data.length;j++) { %>
         <% if (data[j].Bid == Bookings[i].Bid ){%>
         <td><%= data[j].name%></td>
@@ -29,5 +38,7 @@
     <%}%>
 
 </table>
+<script>
+</script>
 </body>
 </html>

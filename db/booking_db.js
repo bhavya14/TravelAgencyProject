@@ -89,14 +89,12 @@ function addMembers(originalData,Bid,callback){
         var key2 = "IDProofType" +i;
         var key3  = "IDProofNumber" + i;
         var key4 = "Age" + i;
-        console.log(key1)
-        console.log(originalData.key3)
         var query = `insert into Booking_member values(${Bid} ,'${originalData[key2]}','${originalData[key3]}','${originalData[key1]}',${originalData[key4]})`
         connection.query(query,function(err){
             console.log(err);
             if(err ==null){
-                if(i>=(Object.keys(originalData).length -5 /4)){
-                    console.log("in here")
+                if(i>=(Object.keys(originalData).length -5 /4) - 1){
+                    console.log(i , "in here")
                     callback();
                 }
             }

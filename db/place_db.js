@@ -30,7 +30,16 @@ function placename(pname,callback){
 
         });
 }
+
+function allPlaces(callback){
+    var query  = "select * from Place";
+    connection.query(query,function(err,data){
+        if(err==null)
+            callback(data);
+    })
+}
 module.exports={
-    placename:placename
+    placename:placename,
+    allPlaces:allPlaces
 }
 
