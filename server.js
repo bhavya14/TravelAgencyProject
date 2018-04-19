@@ -539,11 +539,7 @@ app.post("/Pay" , function(req,res){
                 price : price
             })
         })
-
     })
-
-
-
 })
 
 app.post("/Payment",function(req,res){

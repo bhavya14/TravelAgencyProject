@@ -32,7 +32,8 @@ function MakePaymenttable()
 }
 function addPayment(Bid , method , amount , callback){
     var today = new Date();
-    var query = `insert into Payments values(${Bid},'${method}',${amount})`;
+    var query = `insert into Payments(Booking_ID,Method,Amount) values(${Bid},'${method}',${amount})`;
+    console.log(query);
     connection.query(query,function(err){
         if(err !=null)
             console.log(err);
