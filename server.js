@@ -13,6 +13,8 @@ var bus = require("./db/Bus");
 var trigger = require("./db/triggers");
 var edb=require('./db/employee_db');
 var paydb=require('./db/payment_db');
+var placedb=require('./db/place_db');
+
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
@@ -50,67 +52,115 @@ app.post("/profile" ,function(req,res){ // User Page
 
 app.post('/booking',function (req,res) {
 
-    var data=req.body;
+    var originalData=req.body;
+   // console.log(Object.keys(originalData).length -5 );
+    var username = req.query.name;
     var Bid;
-    console.log("form data : ", data);
-    bdb.add(req.body.source,req.body.dest,req.body.startDate,req.body.returnDate ,req.query.name ,Math.floor(Math.random()*222222),Math.floor(Math.random()*2),function (bid) {
-        console.log("Added a booking");
-        Bid = bid;
-        console.log(Bid);
-        if(data.travelMode == 1){
-            // flight selected
-            console.log("inside :" , data);
-            flight.addFlight(data, Bid,function(FlightData){
-                Details =FlightData[0];
-                ReturnDetails = FlightData[1];
-                console.log( "data : ",FlightData);
-                console.log(FlightData[1]);
+     console.log("form dataa : ", originalData);
+    // console.log(originalData.source);
 
-                res.render('pages/BookingDetails',{
-                    data:data,
-                    Bid:Bid,
-                    Details:Details,
-                    ReturnDetails : ReturnDetails,
-                    name:req.query.name
+    var ss;
+    var dd;
 
-                })
-            })
-        }else if(data.travelMode == 2){
-            train.addTrain(data, Bid,function(TrainData){
-                Details =TrainData[0];
-                ReturnDetails = TrainData[1];
-                console.log( "data : ",TrainData);
-                console.log(TrainData[1]);
+    placedb.placename(req.body.source, function (data) {
+        console.log(data);
+        if (data.length == 0) {
+            ss = 0;
+        }
+        else {
+            ss = (data[0].Pid);
+            placedb.placename(req.body.dest, function (data) {
+                console.log(data);
+                if (data.length == 0) {
+                    dd = 0;
+                }
+                else {
+                    dd = (data[0].Pid);
+                    // addBooking(originalData,username);
+                   // console.log("start date:" , originalData.startDate);
+                    bdb.add(originalData.source,originalData.dest,originalData.startDate,originalData.returnDate ,username ,Math.floor(Math.random()*222222),Math.floor(Math.random()*2),function (bid) {
+                        console.log("Added a booking");
+                        Bid = bid;
+                        console.log(Bid);
+                        if(originalData.travelMode == 1){
+                            // flight selected
+                            console.log("inside :" , originalData);
+                            flight.addFlight(originalData, Bid,function(FlightData){
+                                Details =FlightData[0];
+                                ReturnDetails = FlightData[1];
+                                console.log( "data : ",FlightData);
+                                console.log(FlightData[1]);
 
-                res.render('pages/BookingDetails',{
-                    data:data,
-                    Bid:Bid,
-                    Details:Details,
-                    ReturnDetails : ReturnDetails,
-                    name:req.query.name
+                                bdb.addMembers(originalData,bid,function(){
+                                    console.log("in here after all additions")
+                                    res.render('pages/BookingDetails',{
+                                        data:originalData,
+                                        Bid:Bid,
+                                        Details:Details,
+                                        ReturnDetails : ReturnDetails,
+                                        name:req.query.name
+                                    })
+                                })
+                            })
+                        }else if(originalData.travelMode == 2){
+                            train.addTrain(originalData, Bid,function(TrainData){
+                                Details =TrainData[0];
+                                ReturnDetails = TrainData[1];
+                                console.log( "data : ",TrainData);
+                                console.log(TrainData[1]);
 
-                })
-            })
+                                res.render('pages/BookingDetails',{
+                                    data:originalData,
+                                    Bid:Bid,
+                                    Details:Details,
+                                    ReturnDetails : ReturnDetails,
+                                    name:req.query.name
 
-        }else{
-            bus.addBus(data, Bid,function(BusData){
-                Details =BusData[0];
-                ReturnDetails = BusData[1];
-                console.log( "data : ",BusData);
-                console.log(BusData[1]);
+                                })
+                            })
 
-                res.render('pages/BookingDetails',{
-                    data:data,
-                    Bid:Bid,
-                    Details:Details,
-                    ReturnDetails : ReturnDetails,
-                    name:req.query.name
+                        }else{
+                            bus.addBus(originalData, Bid,function(BusData){
+                                Details =BusData[0];
+                                ReturnDetails = BusData[1];
+                                console.log( "data : ",BusData);
+                                console.log(BusData[1]);
 
-                })
+                                res.render('pages/BookingDetails',{
+                                    data:originalData,
+                                    Bid:Bid,
+                                    Details:Details,
+                                    ReturnDetails : ReturnDetails,
+                                    name:req.query.name
+
+                                })
+                            })
+                        }
+                    });
+                }
+                console.log(dd);
+                if (dd == 0) {
+
+                    res.send({
+
+                        "failed": "Enter a correct destination name"
+                    })
+                }
+            });
+        }
+        console.log(ss);
+        if (ss == 0) {
+
+            res.send({
+
+                "failed": "Enter a correct source name"
             })
         }
     });
-    })
+})
+
+
+
 
 app.post('/BookingDetailsInHistory',function(req,res){
    var Bid = req.query.Booking;

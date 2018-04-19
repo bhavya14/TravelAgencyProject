@@ -13,7 +13,7 @@ function Connect() {
 
 
 function createPlace() {
-    var query  = "create table Place(Place_id int PRIMARY KEY , name varchar(255) NOT NULL)"
+    var query  = "create table Place(Pid int PRIMARY KEY auto_increment, Name varchar(255) NOT NULL)"
     connection.query(query,
         function(err,results,fields){
             console.log(err)
@@ -21,5 +21,16 @@ function createPlace() {
             console.log(fields)
         })
 }
+function placename(pname,callback){
+    var query=`select Pid from Place where Name='${pname}'`
+    connection.query(query,
+        function (err,data) {
+            console.log("Inside the placename table data is");
+            callback(data);
 
+        });
+}
+module.exports={
+    placename:placename
+}
 

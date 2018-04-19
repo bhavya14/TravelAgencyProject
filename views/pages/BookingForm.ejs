@@ -3,18 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Logged in</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        //document.getElementById('un').value = "<%=name%>";
+
+        $(document).ready(function () {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('startDate').setAttribute("min", today);
+            document.getElementById('ReturnDate').setAttribute("min", today);
+            var count = 0;
+            $('#NewMember').click(function () {
+                console.log("here");
+
+                var field = document.createElement("input");
+                 field.setAttribute("name","Name" + count)
+                 field.setAttribute("placeholder","Name")
+                document.getElementById('form').appendChild(field);
+
+                var field1 = document.createElement("input");
+                field1.setAttribute("name","IDProofType" + count)
+                field1.setAttribute("placeholder","IDProofType")
+                document.getElementById('form').appendChild(field1);
+
+                var field2 = document.createElement("input");
+                field2.setAttribute("name","IDProofNumber" + count)
+                field2.setAttribute("placeholder","IDProofNumber")
+                document.getElementById('form').appendChild(field2);
+
+                var field3 = document.createElement("input");
+                field3.setAttribute("name","Age" + count)
+                field3.setAttribute("placeholder","Age")
+                field3.setAttribute("class","new")
+                document.getElementById('form').appendChild(field3);
+
+                count= count+1;
+            });
+
+        })
+
+    </script>
+
+    <style>
+        .new {
+            margin-right: 60%;
+        }
+    </style>
+
 </head>
 <body>
-<h1><%= name%></h1>
+<h1 id="name"><%=name%></h1>
+<h4 id="user" hidden><%=username%></h4>
 <form action="/booking?name=<%=username%>" method="post" id="form">
     <label><b>Source</b></label>
     <input type="text" placeholder="Source" name="source" id="source" required>
+    <br>
     <label><b>Destination</b></label>
     <input type="text" placeholder="Destination" name="dest" id="dest" required>
+    <br>
     <label>Start date </label>
     <input type="date" id="startDate" name = "startDate" required >
+    <br>
     <label><b>Return date</b> </label>
     <input type="date" id="ReturnDate" name = "returnDate" required >
+    <br>
 
     <label><b>Travel Mode</b></label>
     <select id="Travel_mode" name = "travelMode">
@@ -22,7 +83,16 @@
         <option value="2">Train</option>
         <option value="3">Bus</option>
     </select>
-    <button type="submit" id="submit" value="Book">Check availability</button>
+    <br>
+    <!--<button type="submit" id="submit" value="Book">Check availability</button>-->
+
+
+    <input type="submit" value="Check">
+    <br>
 </form>
+
+<button id="NewMember"> Add Member</button>
+
+
 </body>
 </html>

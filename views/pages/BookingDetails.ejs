@@ -154,6 +154,7 @@
                 <td><%= Details.Start_date%></td>
                 <td><%= Details.Duration%></td>
             </tr>
+            <% if(ReturnDetails !=null){ %>
             <tr>
                 <td><b>Return Journey</b></td>
                 <td> <%= ReturnDetails.Bus_number%></td>
@@ -162,23 +163,11 @@
                 <td><%= ReturnDetails.Start_date%></td>
                 <td><%= ReturnDetails.Duration%></td>
             </tr>
+            <% }%>
+
         </table>
         <% }%>
-        <form action="/package?name=<%=name%>" method="post" id="form">?    <h1>VIEW PACKAGES</h1>
-            <INPUT TYPE="Radio" Name="Package" Value="20000" id="G">Gold
-            <INPUT TYPE="Radio" Name="Package" Value="10000" id="P">Premium
-            <INPUT TYPE="Radio" Name="Package" Value="5000" id="S">Silver
-
-            VIEW HOTELS AT THE PLACE
-            *****
-            <button type="submit" id="submit">Make Payment</button>
-
-
-
         </form>
-
-
-
     </div>
 </body>
 </html>

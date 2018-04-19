@@ -10,7 +10,6 @@ function Connect() {
     connection.connect();
     console.log("connected")
 }
-
 function createtables() {
 var query=
         "create table Bookings(Bid int auto_increment PRIMARY KEY,"+
@@ -44,7 +43,6 @@ function bookingmember() {
             console.log(err)
 
         })
-
     connection.query(query,
         function(err,results,fields){
             console.log("Table created");
@@ -52,11 +50,9 @@ function bookingmember() {
             // console.log(results)
             // console.log(fields)
         })
-
 }
 
 function add(source, destination,startdate,returnDate,username, pnr,eid,callback) {
-
     console.log(startdate)
     connection.query(`insert into Bookings (travel_from,travel_to,PNR,username, Start_date,End_date,Eid) values('${source}','${destination}',${pnr},'${username}','${startdate}','${returnDate}',${eid}) `, function(err,data) {
        if(err ==null ) {
@@ -81,10 +77,40 @@ function displayUserHistory(username,callback){
         callback(data);
     });
 }
+
+
+function addMembers(originalData,Bid,callback){
+    console.log(originalData);
+    var i=0;
+    console.log((Object.keys(originalData).length -5 )/4);
+    console.log(originalData["Name" + i])
+    for (  ;i< (Object.keys(originalData).length -5 )/4;i++){
+        var key1 ="Name" + i;
+        var key2 = "IDProofType" +i;
+        var key3  = "IDProofNumber" + i;
+        var key4 = "Age" + i;
+        console.log(key1)
+        console.log(originalData.key3)
+        var query = `insert into Booking_member values(${Bid} ,'${originalData[key2]}','${originalData[key3]}','${originalData[key1]}',${originalData[key4]})`
+        connection.query(query,function(err){
+            console.log(err);
+            if(err ==null){
+                if(i>=(Object.keys(originalData).length -5 /4)){
+                    console.log("in here")
+                    callback();
+                }
+            }
+        })
+    }
+
+
+
+}
 module.exports = {
     createtable:createtables,
     connect: Connect,
     display: display,
     add: add,
-    displayUserHistory: displayUserHistory
+    displayUserHistory: displayUserHistory,
+    addMembers:addMembers
 }
