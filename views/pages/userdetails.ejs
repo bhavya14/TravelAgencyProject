@@ -36,8 +36,12 @@
     <INPUT TYPE="Radio" Name="Gender" Value="M" id="M">Male
     <INPUT TYPE="Radio" Name="Gender" Value="F" id="F">Female
     </br>
+    <label><b>Contact Number</b></label>
+    <input type="number" name="Contact0" minlength="10" required ></br>
+    <button type=button id="add">Add Contact</button>
     <button type="submit" id="submit" value="Book">Sign Up</button>
 </form>
+
 <script>
     $(document).ready(function(){
         var dtToday = new Date();
@@ -50,6 +54,18 @@
             day = '0' + day.toString();
         var maxDate = year + '-' + month + '-' + day;
         document.getElementById("myDate").setAttribute("max", maxDate);
+        var count =1 ;
+        $('#add').click(function () {
+            console.log("here");
+            var field = document.createElement("input");
+            field.setAttribute("name","Contact" + count);
+            field.setAttribute("type","number");
+            field.setAttribute("minlength","10");
+            field.setAttribute("placeholder","Contact")
+            document.getElementById('form').appendChild(field);
+            count= count+1;
+        });
+
     });
 </script>
 </body>

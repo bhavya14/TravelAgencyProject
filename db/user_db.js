@@ -59,10 +59,37 @@ function UsernameCheck(fname,callback) {
         callback(data);
     });
 }
+
+function addContact(data,callback){
+    console.log("entered contact entering");
+    connection.query(`insert into user_contact values("${data.uname}" , ${data.Contact0})`,function(err){
+        console.log(err);
+
+      if(Object.keys(data).length >=11){
+          var i=1;
+          for (  ;i<= (Object.keys(data).length -11 );i++){
+              console.log("entered contact entering loop");
+              var key1 ="Contact" + i;
+              var query = `insert into user_contact values("${data.uname}",${data[key1]})`
+              connection.query(query,function(err){
+                  console.log(err);
+                  if(err ==null){
+                      if(i>=(Object.keys(data).length -11)){
+                          console.log(i , "in here")
+                          callback();
+                      }
+                  }
+              })
+          }
+      }
+    })
+}
+
 module.exports = {
     createUser:createUser,
     connect: Connect,
     adduser:adduser,
     display:display,
-    UsernameCheck:UsernameCheck
+    UsernameCheck:UsernameCheck,
+    addContact : addContact
 }

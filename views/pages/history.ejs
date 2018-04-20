@@ -12,6 +12,13 @@
 
     <% for(var i=0; i < Bookings.length; i++) { %>
     <tr>
+        <% if (Bookings[i].Status=='0' ){%>
+        <td><%= Bookings[i].Bid %></td>
+        <td><%= Bookings[i].travel_to %></td>
+        <td><%= Bookings[i].travel_from %></td>
+        <td><%= dataDate[i] %></td>
+        <td><b>Cancelled</b></td>
+        <%} else if(Bookings[i].Status=='1') {%>
         <td><%= Bookings[i].Bid %></td>
         <td><%= Bookings[i].travel_to %></td>
         <td><%= Bookings[i].travel_from %></td>
@@ -21,17 +28,21 @@
             </form>
         </td>
         <% if(new Date(dataDate[i])>new Date('2018-04-19')) {%>
-        <td><form action = "/DeleteTheBooking?Booking= <%=Bookings[i].Bid%>" method = "post">
+        <td><form action = "/DeleteTheBooking?Bid= <%=Bookings[i].Bid%>" method = "post">
                 <input type="submit" name="delete" value="delete" />
             </form>
             <%}%>
+            <%}%>
     </tr>
     <tr>
+        <% if (Bookings[i].Status==1 ){%>
         <% for(var j=0 ; j<data.length;j++) { %>
         <% if (data[j].Bid == Bookings[i].Bid ){%>
+        Booking member:
         <td><%= data[j].name%></td>
         <td><%= data[j].age%></td>
         <td><%= data[j].id_proof_number %></td>
+        <%}%>>
     </tr>
     <% }%>
     <%}%>

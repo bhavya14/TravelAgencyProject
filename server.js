@@ -14,6 +14,7 @@ var trigger = require("./db/triggers");
 var edb=require('./db/employee_db');
 var paydb=require('./db/payment_db');
 var placedb=require('./db/place_db');
+var canceldb=require('./db/cancellation');
 
 
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -227,15 +228,19 @@ app.post('/userdetails',function (req,res) {
             udb.UsernameCheck(req.body.uname,function (data) {
                 // console.log("Data to be checked is")
                 // console.log(data);
-                if(data.length==0)
+                if(data.length===0)
                 {
                     udb.adduser(req.body.fname, req.body.lname,req.body.uname,req.body.password,req.body.mail,req.body.dob,req.body.address,req.body.Gender,req.body.proof,req.body.nproof,function (data) {
-                        res.render('pages/profile',{
-                            name:req.body.fname,
-                            last_name : req.body.lname,
-                            username:req.body.uname
+
+                        udb.addContact(req.body,function(){
+                            res.render('pages/profile',{
+                                name:req.body.fname,
+                                last_name : req.body.lname,
+                                username:req.body.uname
+                            })
+                            console.log("Done")
                         })
-                        console.log("Done")
+
                     })
                     res.send({
 
@@ -392,7 +397,7 @@ app.post('/UserHistory',function(req,res){
 
     var username = req.body.username;
     var Bookings;
-    var query  = `select distinct(Bid),travel_to,travel_from,Start_Date from Bookings where username = "${username}"`;
+    var query  = `select distinct(Bid),travel_to,travel_from,Start_Date,Status from Bookings where username = "${username}"`;
     connection.query(query , function(err,data){
         Bookings = data;
         console.log("bookings is :::");
@@ -540,7 +545,7 @@ app.post("/Pay" , function(req,res){
             })
         })
     })
-})
+});
 
 app.post("/Payment",function(req,res){
     var Bid = req.query.Bid;
@@ -549,3 +554,10 @@ app.post("/Payment",function(req,res){
         res.render('pages/Successful')
     })
 });
+app.post('/DeleteTheBooking',function (req,res) {
+    canceldb.delte(req.query.Bid,function (err,data) {
+    })
+    console.log(req.query.Bid);
+    res.render('pages/booking',{
+    })
+})

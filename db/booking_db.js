@@ -54,7 +54,7 @@ function bookingmember() {
 
 function add(source, destination,startdate,returnDate,username, pnr,eid,callback) {
     console.log(startdate)
-    connection.query(`insert into Bookings (travel_from,travel_to,PNR,username, Start_date,End_date,Eid) values('${source}','${destination}',${pnr},'${username}','${startdate}','${returnDate}',${eid}) `, function(err,data) {
+    connection.query(`insert into Bookings (travel_from,travel_to,PNR,username, Start_date,End_date,Eid,Status) values('${source}','${destination}',${pnr},'${username}','${startdate}','${returnDate}',${eid},'1') `, function(err,data) {
        if(err ==null ) {
             callback(data.insertId);
        }
@@ -82,7 +82,7 @@ function displayUserHistory(username,callback){
 function addMembers(originalData,Bid,callback){
 
     console.log(originalData)
-    if(Object.keys(originalData).length == 5){
+    if(Object.keys(originalData).length === 5){
         console.log("going back")
         callback();
     }
