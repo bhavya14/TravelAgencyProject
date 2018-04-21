@@ -10,9 +10,46 @@
 
 </head>
 <body>
-Your Details !
 <h1 id="name"><%= ename%></h1>
-<h1 id="user"><%= eid%></h1>
+<h3 id="user"><%= eid%></h3>
+<div style="border: solid ; border-color: beige ;padding: 10% ; float: left">
+    <h2>Details : </h2>
+    <table cellpadding="10">
+        <tr>
+            <td> FirstName</td>
+            <td>LastName</td>
+            <td>Working From</td>
+            <td>DOB</td>
+            <td>Address</td>
+            <td>Gender</td>
+            <td>Department</td>
+        </tr>
+        <tr>
+            <td> <%= ename%></td>
+            <td><%= lname%></td>
+            <td><%= wfrom%></td>
+            <td><%= dob%></td>
+            <td><%= add%></td>
+            <td><%= gen%></td>
+            <td><%= dept%></td>
+        </tr>
+        <tr>
+            <td> Bookings handled : </td>
+        </tr>
+        <tr>
+            <td> BookingID</td>
+            <td> User</td>
+        </tr>
+        <% for(var i=0; i < BookingData.length; i++) { %>
+            <tr>
+                <td><%= BookingData[i].Bid%></td>
+                <td><%= BookingData[i].username%></td>
+            </tr>
+        <%}%>
+    </table>
+</div>
+
+
 
 </body>
 </html>

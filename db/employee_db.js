@@ -67,7 +67,6 @@ function createEmployee() {
         "create table employee(Eid int PRIMARY KEY,"+
         "FirstName varchar(255) NOT NULL,"+
         "LastName varchar(255)," +
-
         "Email_id varchar(255) NOT NULL," +
         "Working_from Date," +
         "Date_Of_Birth Date NOT NULL," +
@@ -108,7 +107,15 @@ function display(id,password,callback) {
     });
 }
 
+function findBookings(id,callback){
+    connection.query(`select Bid,username from Bookings where Eid = ${id}`,function(err,data){
+        console.log(err);
+        callback(data);
+    })
+}
+
 module.exports={
     createEmployee:createEmployee,
-    display:display
+    display:display,
+    findBookings: findBookings
 }

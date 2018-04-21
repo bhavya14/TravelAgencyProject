@@ -87,7 +87,7 @@ app.post('/booking',function (req,res) {
                         dd = (data[0].Pid);
                         // addBooking(originalData,username);
                         // console.log("start date:" , originalData.startDate);
-                        bdb.add(originalData.source, originalData.dest, originalData.startDate, originalData.returnDate, username, Math.floor(Math.random() * 222222), Math.floor(Math.random() * 2), function (bid) {
+                        bdb.add(originalData.source, originalData.dest, originalData.startDate, originalData.returnDate, username, Math.floor(Math.random() * 222222), Math.floor(Math.random() * 3), function (bid) {
                             console.log("Added a booking");
                             Bid = bid;
                             console.log(Bid);
@@ -506,18 +506,24 @@ app.post("/eprofile",function (req,res) {
             })
         }
         else {
-            res.render('pages/eprofile', {
-                ename: data[0].FirstName,
-                eid:data[0].Email_id,
-                lname:data[0].LastName,
-                wfrom:data[0].Working_from,
-                dob:data[0].Date_Of_Birth,
-                add:data[0].Address,
-                gen:data[0].Gender,
-                aid:data[0].Account_id,
-                dept:data[0].Department
 
-            });
+            edb.findBookings(data[0].Eid,function(BookingData){
+                console.log(BookingData);
+                res.render('pages/eprofile', {
+                    ename: data[0].FirstName,
+                    eid:data[0].Email_id,
+                    lname:data[0].LastName,
+                    wfrom:data[0].Working_from,
+                    dob:data[0].Date_Of_Birth,
+                    add:data[0].Address,
+                    gen:data[0].Gender,
+                    aid:data[0].Account_id,
+                    dept:data[0].Department,
+                    BookingData : BookingData
+
+                });
+            })
+
         }
     })
 
