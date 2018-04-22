@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ca6f9c4-4329-4844-badd-843a00c5e59f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/db/Bus.js" afterPath="$PROJECT_DIR$/db/Bus.js" />
-      <change beforePath="$PROJECT_DIR$/db/booking_db.js" afterPath="$PROJECT_DIR$/db/booking_db.js" />
-      <change beforePath="$PROJECT_DIR$/db/flight.js" afterPath="$PROJECT_DIR$/db/flight.js" />
-      <change beforePath="$PROJECT_DIR$/db/train.js" afterPath="$PROJECT_DIR$/db/train.js" />
       <change beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change beforePath="$PROJECT_DIR$/views/pages/history.ejs" afterPath="$PROJECT_DIR$/views/pages/history.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="404" column="30" lean-forward="false" selection-start-line="404" selection-start-column="30" selection-end-line="404" selection-end-column="30" />
+            <state relative-caret-position="252">
+              <caret line="569" column="10" lean-forward="false" selection-start-line="569" selection-start-column="10" selection-end-line="569" selection-end-column="10" />
               <folding>
                 <element signature="e#792#1504#0" expanded="false" />
                 <element signature="e#913#1500#0" expanded="false" />
@@ -42,6 +36,16 @@
                 <element signature="n#!!block;n#getRandomInt#0" expanded="false" />
                 <element signature="e#17489#17530#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="payment.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/pages/payment.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="17" column="54" lean-forward="false" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="54" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -100,24 +104,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="train.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="train.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/train.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
+            <state relative-caret-position="-36">
               <caret line="41" column="154" lean-forward="false" selection-start-line="41" selection-start-column="154" selection-end-line="41" selection-end-column="154" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="employee_db.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/employee_db.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-436">
-              <caret line="68" column="34" lean-forward="false" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
-              <folding>
-                <element signature="e#1#36#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -209,8 +201,8 @@
         <option value="$PROJECT_DIR$/db/booking_db.js" />
         <option value="$PROJECT_DIR$/db/flight.js" />
         <option value="$PROJECT_DIR$/db/Bus.js" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/db/train.js" />
+        <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
   </component>
@@ -363,7 +355,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221652000" />
+    <option name="totallyTimeSpent" value="222033000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -653,14 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/pages/payment.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/pages/userdetails.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-116">
@@ -779,10 +763,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/db/train.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-36">
+          <caret line="41" column="154" lean-forward="false" selection-start-line="41" selection-start-column="154" selection-end-line="41" selection-end-column="154" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/pages/payment.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="17" column="54" lean-forward="false" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="404" column="30" lean-forward="false" selection-start-line="404" selection-start-column="30" selection-end-line="404" selection-end-column="30" />
+        <state relative-caret-position="252">
+          <caret line="569" column="10" lean-forward="false" selection-start-line="569" selection-start-column="10" selection-end-line="569" selection-end-column="10" />
           <folding>
             <element signature="e#792#1504#0" expanded="false" />
             <element signature="e#913#1500#0" expanded="false" />
@@ -798,14 +798,6 @@
             <element signature="n#!!block;n#getRandomInt#0" expanded="false" />
             <element signature="e#17489#17530#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/train.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="41" column="154" lean-forward="false" selection-start-line="41" selection-start-column="154" selection-end-line="41" selection-end-column="154" />
-          <folding />
         </state>
       </provider>
     </entry>

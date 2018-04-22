@@ -554,9 +554,22 @@ app.post("/Pay" , function(req,res){
 app.post("/Payment",function(req,res){
     var Bid = req.query.Bid;
     console.log("Bid : " ,Bid);
-    paydb.addPayment(Bid,req.body.method,req.body.price,function(){
-        res.render('pages/Successful')
-    })
+    if(req.body.num.length !=16){
+        res.send({
+            "code":400,
+            "failed":"Card number incorrect"
+        })
+    }else if (req.body.cvv.length !=3){
+        res.send({
+            "code":400,
+            "failed":"cvv incorrect"
+        })
+    }else{
+        paydb.addPayment(Bid,req.body.method,req.body.price,function(){
+            res.render('pages/Successful')
+        })
+    }
+
 });
 app.post('/DeleteTheBooking',function (req,res) {
     canceldb.delte(req.query.Bid,function (err,data) {
