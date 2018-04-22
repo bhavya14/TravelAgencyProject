@@ -570,9 +570,10 @@ app.post("/Payment",function(req,res){
 
 });
 app.post('/cancel',function (req,res) {
-    canceldb.delte(req.query.Bid,function (err,data) {
-        bdb.getUser(req.query.Bid,function(err,user){
-            res.render('pages/Cancel',{
+    canceldb.delte(req.query.Bid,function (data) {
+        bdb.getUser(req.query.Bid,function(user){
+            console.log(user);
+            res.render('pages/cancel',{
                 username :user
             })
         })
@@ -598,10 +599,16 @@ app.post('/DeleteTheBooking',function (req,res) {
 
 })
 
+
 app.post('/BackToProfile',function(req,res){
-    var username = req.query.name;
-
-    res.render('pages/profile',{
-
+    var username = req.query.username;
+    udb.getDetails(username,function(data){
+        console.log("profile data : ",data)
+        res.render('pages/profile',{
+            name:data[0].FirstName,
+            last_name : data[0].LastName,
+            username:username
+        })
     })
-})
+
+});
