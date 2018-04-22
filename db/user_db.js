@@ -85,11 +85,18 @@ function addContact(data,callback){
     })
 }
 
+function getDetails(username,callback){
+    connection.query(`select * from user where Username = '${username}'`,function(err,data){
+        callback(data);
+    })
+}
+
 module.exports = {
     createUser:createUser,
     connect: Connect,
     adduser:adduser,
     display:display,
     UsernameCheck:UsernameCheck,
-    addContact : addContact
+    addContact : addContact,
+    getDetails : getDetails
 }

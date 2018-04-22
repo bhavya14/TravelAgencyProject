@@ -65,7 +65,7 @@ function add(source, destination,startdate,returnDate,username, pnr,eid,callback
 }
 
 function display() {
-    connection.query('select * from booking', function(err,data) {
+    connection.query('select * from bookings', function(err,data) {
         console.log("data : " , data)
 
     });
