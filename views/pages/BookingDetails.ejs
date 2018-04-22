@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged in</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style>
+        input{
+            padding: 10px;
+            width: 10%;
+        }
+    </style>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#gold').click(function () {
+                document.getElementById('pack').value="1000";
+            }) ;
+            $('#prem').click(function () {
+                document.getElementById('pack').value="2000";
+            });
+        })
+        //    $(document).ready(function(){
+        //
+        //        console.log("Package is");
+        //      $('#gold').click(function () {
+        //          document.getElementById('pack').value.set();
+        //      }) ;
+        //      $('#prem').click(function () {
+        //            document.getElementById('pack').value.set("2000");
+        //        });
+        //
+        //            console.log("in here")
+        //            $("#submit").click (function () {
+        //                console.log("in here too");
+        //                post('/package', {name:$("#pack").value
+        //                });
+        //            })
+        //        })
+        //
+        //        function post(path, params, method) {
+        //            method = method || "post"; // Set method to post by default if not specified.
+        //
+        //            // The rest of this code assumes you are not using a library.
+        //            // It can be made less wordy if you use one.
+        //            var form = document.createElement("form");
+        //            form.setAttribute("method", method);
+        //            form.setAttribute("action", path);
+        //
+        //            for(var key in params) {
+        //                if(params.hasOwnProperty(key)) {
+        //                    var hiddenField = document.createElement("input");
+        //                    hiddenField.setAttribute("type", "hidden");
+        //                    hiddenField.setAttribute("name", key);
+        //                    hiddenField.setAttribute("value", params[key]);
+        //
+        //                    form.appendChild(hiddenField);
+        //                }
+        //            }
+        //            document.body.appendChild(form);
+        //            form.submit();
+        //        }
+    </script>
+</head>
+<body>
+    <div style="border: solid ; border-color: beige ;padding: 10% ;margin-left: 10%; float: left">
+        <table cellpadding="10">
+            <tr>
+                <td> Bid </td>
+                <td> Source</td>
+                <td> Destination</td>
+                <td> Date</td>
+            </tr>
+            <tr>
+               <td> <%= Bid%></td>
+                <td><%= data.source%><%= data.travel_from%></td>
+                <td><%= data.dest%><%= data.travel_to%></td>
+                <td><%= data.startDate%><%= data.Start_Date%></td>
+            </tr>
+        </table>
+        <% if(data.travelMode == 1){ %>
+             <h3>Flight details</h3>
+        <table cellpadding="10">
+            <tr>
+                <td></td>
+                <td> Flight number </td>
+                <td> Departure from</td>
+                <td> Arrival At</td>
+                <td> Date and Time of Departure </td>
+                <td> Duration </td>
+            </tr>
+            <tr>
+                <td><b> Onward Journey </b></td>
+                <td> <%= Details.Flight_Number%></td>
+                <td><%= Details.Airport_start%></td>
+                <td><%= Details.Airport_land%></td>
+                <td><%= Details.Start_date%></td>
+                <td><%= Details.Duration%></td>
+            </tr>
+            <tr>
+                <td><b>Return Journey</b></td>
+                <td> <%= ReturnDetails.Flight_Number%></td>
+                <td><%= ReturnDetails.Airport_start%></td>
+                <td><%= ReturnDetails.Airport_land%></td>
+                <td><%= ReturnDetails.Start_date%></td>
+                <td><%= ReturnDetails.Duration%></td>
+            </tr>
+        </table>
+        <% }%>
+
+        <% if(data.travelMode == 2){ %>
+        <h3>Train details</h3>
+        <table cellpadding="10">
+            <tr>
+                <td></td>
+                <td> Train number </td>
+                <td> Departure from</td>
+                <td> Arrival At</td>
+                <td> Date and Time of Departure </td>
+                <td> Duration </td>
+            </tr>
+            <tr>
+                <td><b> Onward Journey </b></td>
+                <td><%= Details.Train_Number%></td>
+                <td><%= Details.RailwayStation_start%></td>
+                <td><%= Details.RailwayStation_reach%></td>
+                <td><%= Details.Start_date%></td>
+                <td><%= Details.Duration%></td>
+            </tr>
+            <tr>
+                <td><b>Return Journey</b></td>
+                <td> <%= ReturnDetails.Train_Number%></td>
+                <td><%= ReturnDetails.RailwayStation_start%></td>
+                <td><%= ReturnDetails.RailwayStation_reach%></td>
+                <td><%= ReturnDetails.Start_date%></td>
+                <td><%= ReturnDetails.Duration%></td>
+            </tr>
+        </table>
+        <% }%>
+
+        <% if(data.travelMode == 3){ %>
+        <h3>Bus details</h3>
+        <table cellpadding="10">
+            <tr>
+                <td></td>
+                <td> Bus number </td>
+                <td> Departure from</td>
+                <td> Arrival At</td>
+                <td> Date and Time of Departure </td>
+                <td> Duration </td>
+            </tr>
+            <tr>
+                <td><b> Onward Journey </b></td>
+                <td> <%= Details.Bus_number%></td>
+                <td><%= Details.BusStop_start%></td>
+                <td><%= Details.BusStop_reach%></td>
+                <td><%= Details.Start_date%></td>
+                <td><%= Details.Duration%></td>
+            </tr>
+            <% if(ReturnDetails !=null){ %>
+            <tr>
+                <td><b>Return Journey</b></td>
+                <td> <%= ReturnDetails.Bus_number%></td>
+                <td><%= ReturnDetails.BusStop_start%></td>
+                <td><%= ReturnDetails.BusStop_reach%></td>
+                <td><%= ReturnDetails.Start_date%></td>
+                <td><%= ReturnDetails.Duration%></td>
+            </tr>
+            <% }%>
+
+        </table>
+        <% }%>
+        <% if(ShowPayment ==true){ %>
+
+        yas yas
+        <br>
+        <br>
+        <br>
+        <form align="center" action="/Pay?Bid=<%=Bid%>" method="post">
+            <input type="submit" id="submit" value="PAY">
+        </form>
+        <% }%>
+    </div>
+</body>
+</html>

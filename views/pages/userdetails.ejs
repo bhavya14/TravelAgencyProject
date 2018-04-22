@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged in</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<h1></h1>
+<!--Booking Profile-->
+<form action="/userdetails" method="post" id="form">
+    <label><b>First Name</b></label>
+    <input type="text" placeholder="FIRST NAME" name="fname" id="fname" required></br>
+    <label><b>Last Name</b></label>
+    <input type="text" placeholder="LAST NAME" name="lname" id="lname" required></br>
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Username" name="uname" id="uname" ></br>
+    <label><b>Password</b></label>
+    <input type="password" minlength=8 placeholder="Enter password" name="password" id="password" required></br>
+    <label><b>Email</b></label>
+    <input type=email placeholder="Email" name="mail" id="mail" required></br>
+    <label><b>Date Of Birth</b></label>
+    <input type="date" id="myDate" name="dob" max ="2018-4-8" required></br>
+    <label><b>Address</b></label>
+    <input type="text" placeholder="Address" name="address" id="address" ></br>
+    <label><b>ID PROOF TYPE</b></label>
+    <select id="proof" name = "proof">
+        <option value="1">Aadhar Card</option>
+        <option value="2">PAN Card</option>
+        <option value="3">Passport</option>
+    </select>
+    <br>
+    <label><b>ID PROOF NUMBER</b></label>
+    <input type="text" placeholder="" name="nproof" id="nproof" required></br>
+    <label><b>Gender</b></label>
+    <INPUT TYPE="Radio" Name="Gender" Value="M" id="M">Male
+    <INPUT TYPE="Radio" Name="Gender" Value="F" id="F">Female
+    </br>
+    <label><b>Contact Number</b></label>
+    <input type="number" name="Contact0" minlength="10" required ></br>
+    <button type=button id="add">Add Contact</button>
+    <button type="submit" id="submit" value="Book">Sign Up</button>
+</form>
+
+<script>
+    $(document).ready(function(){
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear() - 10;
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        var maxDate = year + '-' + month + '-' + day;
+        document.getElementById("myDate").setAttribute("max", maxDate);
+        var count =1 ;
+        $('#add').click(function () {
+            console.log("here");
+            var field = document.createElement("input");
+            field.setAttribute("name","Contact" + count);
+            field.setAttribute("type","number");
+            field.setAttribute("minlength","10");
+            field.setAttribute("placeholder","Contact")
+            document.getElementById('form').appendChild(field);
+            count= count+1;
+        });
+
+    });
+</script>
+</body>
+
+</html>

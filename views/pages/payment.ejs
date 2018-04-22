@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged in</title>
+</head>
+<body>
+<h3> Amount Payable : <span><%= price%></span></h3>
+<form action="/Payment?Bid=<%=Bid%>" method="post" id="form">
+
+    <label><b>Card Type</b></label>
+    <select id="method" name="method">
+        <option value="credit">Credit</option>
+        <option value="debit">Debit</option>
+    </select>
+    </br>
+    <label><b>Card Number</b></label>
+    <input type="text" placeholder="CardNum" name="num" id="num" required>
+    </br>
+    <label><b>CVV</b></label>
+    <input type="text" placeholder="CVV" name="cvv" id="cvv" required>
+    </br>
+    <input type="text" hidden value="<%=price%>" name="price">
+    <button type="submit" value="submit" id="submit">Submit</button>
+</form>
+
+
+</body>
+
+</html>

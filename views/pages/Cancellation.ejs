@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged in</title>
+</head>
+<body>
+<h3>
+Orignal amount : <%=amount%>
+    </br>
+10% of orignal amount would be deducted
+    </br>
+<%=amount-0.1*amount%> would be refunded
+    </br>
+Click here to confirm
+    </h3>
+
+    <form action = "/Cancel?Bid= <%=Bid%>" method = "post">
+        <input type="submit" name="Cancel Booking" value="Cancel Booking" />
+    </form>
+
+</body>
+</html>
