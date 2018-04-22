@@ -128,6 +128,11 @@ function fetchData(Bid,callback){
         }
     })
 }
+function getUser(Bid,callback){
+    connection.query(`select username from Bookings where Bid = ${Bid}`,function(err,data){
+        callback(data[0].username);
+    })
+}
 module.exports = {
     createtable:createtables,
     connect: Connect,
@@ -135,5 +140,6 @@ module.exports = {
     add: add,
     displayUserHistory: displayUserHistory,
     addMembers:addMembers,
-    fetchData:fetchData
+    fetchData:fetchData,
+    getUser:getUser
 }

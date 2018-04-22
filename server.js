@@ -23,7 +23,6 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.post("/profile" ,function(req,res){ // User Page
-    console.log(req.body.password);
     udb.display(req.body.username,'*',req.body.password,function(data){
         console.log("Data is");
         console.log(data);
@@ -48,7 +47,6 @@ app.post("/profile" ,function(req,res){ // User Page
             });
         }
     })
-
 })
 app.post('/booking',function (req,res) {
 
@@ -571,10 +569,39 @@ app.post("/Payment",function(req,res){
     }
 
 });
-app.post('/DeleteTheBooking',function (req,res) {
+app.post('/cancel',function (req,res) {
     canceldb.delte(req.query.Bid,function (err,data) {
+        bdb.getUser(req.query.Bid,function(err,user){
+            res.render('pages/Cancel',{
+                username :user
+            })
+        })
+
     })
-    console.log(req.query.Bid);
-    res.render('pages/booking',{
+
+})
+app.post('/DeleteTheBooking',function (req,res) {
+    var amount;
+    var v=req.query.Bid;
+    console.log(v);
+    var query  = `select * from Payments where Booking_Id = "${v}"`;
+    connection.query(query , function(err,data){
+        console.log(err);
+        amount=data[0].Amount
+        console.log(amount);
+        res.render('pages/Cancellation',{
+            Bid:req.query.Bid,
+            amount:amount,
+        })
+    });
+
+
+})
+
+app.post('/BackToProfile',function(req,res){
+    var username = req.query.name;
+
+    res.render('pages/profile',{
+
     })
 })
