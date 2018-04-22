@@ -30,30 +30,35 @@ function createTable(){
 }
 
 function addTrain(data , bid,callback){
+    var query = `select duration from master where source='${data.source}' and destination = '${data.dest}'`;
+    connection.query(query,function(err,data1) {
+        var duration = data1[0].duration +10;
+        var query  = `insert into train(Bid,Train_number,RailwayStation_start ,RailwayStation_reach,Duration,Start_date) values(${bid},'54465','${data.source}', '${data.dest}',${duration},'${data.startDate}')`;
+        console.log(query);
+        connection.query(query,function(err){
+            console.log(err);
 
-    var query  = `insert into train(Bid,Train_number,RailwayStation_start ,RailwayStation_reach,Duration,Start_date) values(${bid},'W78899','${data.source}', '${data.dest}',2,'${data.startDate}')`;
-    console.log(query);
-    connection.query(query,function(err){
-        console.log(err);
+            if(data.returnDate!=null){
+                var queryReturn = `insert into train(Bid,Train_number,RailwayStation_start ,RailwayStation_reach,Duration,Start_date) values(${bid},'56454','${data.dest}','${data.source}',${duration},'${data.returnDate}')`;
+                connection.query(queryReturn,function(err){
+                    console.log("err : ",err);
+                    var q = `select * from train where Bid = ${bid}`;
+                    connection.query(q,function(err,data){
+                        console.log("Train data : ", data)
+                        callback(data);
+                    })
 
-        if(data.returnDate!=null){
-            var queryReturn = `insert into train(Bid,Train_number,RailwayStation_start ,RailwayStation_reach,Duration,Start_date) values(${bid},'L98799','${data.dest}','${data.source}',2,'${data.returnDate}')`;
-            connection.query(queryReturn,function(err){
-                console.log("err : ",err);
+                })
+            }else{
                 var q = `select * from train where Bid = ${bid}`;
                 connection.query(q,function(err,data){
                     console.log("Train data : ", data)
                     callback(data);
                 })
+            }
 
-            })
-        }else{
-            var q = `select * from train where Bid = ${bid}`;
-            connection.query(q,function(err,data){
-                console.log("Train data : ", data)
-                callback(data);
-            })
-        }
+        })
+
 
     })
 

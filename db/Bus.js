@@ -30,31 +30,35 @@ function createTable(){
 }
 
 function addBus(data , bid,callback){
+    var query = `select duration from master where source='${data.source}' and destination = '${data.dest}'`;
+    connection.query(query,function(err,data1) {
+        var duration  = data1[0].duration + 20;
 
-    var query  = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration,Start_date) values(${bid},'W78899','${data.source}', '${data.dest}',2,'${data.startDate}' )`;
-    console.log(query);
-    connection.query(query,function(err){
-        console.log(err);
+        var query  = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration,Start_date) values(${bid},'DL4355','${data.source}', '${data.dest}',${duration},'${data.startDate}' )`;
+        console.log(query);
+        connection.query(query,function(err){
+            console.log(err);
 
-        if(data.returnDate!=null){
-            var queryReturn = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration,Start_date) values(${bid},'L98799','${data.dest}','${data.source}',2,'${data.returnDate}')`;
-            connection.query(queryReturn,function(err){
-                console.log("err : ",err);
+            if(data.returnDate!=null){
+                var queryReturn = `insert into Bus(Bid,Bus_Number,BusStop_start ,BusStop_reach,Duration,Start_date) values(${bid},'DL4564','${data.dest}','${data.source}',${duration},'${data.returnDate}')`;
+                connection.query(queryReturn,function(err){
+                    console.log("err : ",err);
+                    var q = `select * from Bus where Bid = ${bid}`;
+                    connection.query(q,function(err,data){
+                        console.log("Bus data : ", data)
+                        callback(data);
+                    })
+
+                })
+            }else{
                 var q = `select * from Bus where Bid = ${bid}`;
                 connection.query(q,function(err,data){
                     console.log("Bus data : ", data)
                     callback(data);
                 })
+            }
 
-            })
-        }else{
-            var q = `select * from Bus where Bid = ${bid}`;
-            connection.query(q,function(err,data){
-                console.log("Bus data : ", data)
-                callback(data);
-            })
-        }
-
+        })
     })
 
 }

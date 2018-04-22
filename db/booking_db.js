@@ -104,7 +104,7 @@ function addMembers(originalData,Bid,callback){
         })
     }
 
-
+    callback();
 
 }
 

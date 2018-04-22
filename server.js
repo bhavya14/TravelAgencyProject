@@ -204,7 +204,8 @@ app.post('/BookingDetailsInHistory',function(req,res){
                 data:data[0],
                 Bid:Bid,
                 Details:Details,
-                ReturnDetails : ReturnDetails
+                ReturnDetails : ReturnDetails,
+                ShowPayment:false
             })
 
         } )
@@ -402,9 +403,6 @@ app.post('/UserHistory',function(req,res){
         Bookings = data;
         console.log("bookings is :::");
         console.log(Bookings);
-
-        console.log("HEre checking now");
-        console.log(((Bookings[2].Start_Date.toString())));
     })
 
 
