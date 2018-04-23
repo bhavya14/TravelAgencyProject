@@ -54,14 +54,27 @@ function bookingmember() {
 
 function add(source, destination,startdate,returnDate,username, pnr,eid,callback) {
     console.log(startdate)
-    connection.query(`insert into Bookings (travel_from,travel_to,PNR,username, Start_date,End_date,Eid,Status) values('${source}','${destination}',${pnr},'${username}','${startdate}','${returnDate}',${eid},'1') `, function(err,data) {
-       if(err ==null ) {
-            callback(data.insertId);
-       }
-       else{
+    if(returnDate.length !=0){
+        connection.query(`insert into Bookings (travel_from,travel_to,PNR,username, Start_date,End_date,Eid,Status) values('${source}','${destination}',${pnr},'${username}','${startdate}','${returnDate}',${eid},'1') `, function(err,data) {
+            if(err ==null ) {
+                callback(data.insertId);
+            }
+            else{
 
-       }
-    })
+            }
+        })
+    }else{
+        connection.query(`insert into Bookings (travel_from,travel_to,PNR,username, Start_date,Eid,Status) values('${source}','${destination}',${pnr},'${username}','${startdate}',${eid},'1') `, function(err,data) {
+            if(err ==null ) {
+                callback(data.insertId);
+            }
+            else{
+
+            }
+        })
+
+    }
+
 }
 
 function display() {

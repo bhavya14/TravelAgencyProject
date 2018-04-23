@@ -55,9 +55,11 @@ app.post('/booking',function (req,res) {
     var Bid;
     var ss;
     var dd;
-    if(req.body.startDate>req.body.returnDate)
+    if(req.body.startDate>req.body.returnDate && req.body.returnDate.length!=0)
     {
+
         console.log("In");
+        console.log(req.body.returnDate.length);
         res.send({
             "code":400,
             "failed":"Check return date"

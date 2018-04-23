@@ -38,7 +38,7 @@ function addTrain(data , bid,callback){
         connection.query(query,function(err){
             console.log(err);
 
-            if(data.returnDate!=null){
+            if(data.returnDate.length!=null){
                 var queryReturn = `insert into train(Bid,Train_number,RailwayStation_start ,RailwayStation_reach,Duration,Start_date) values(${bid},'56454','${data.dest}','${data.source}',${duration},'${data.returnDate}')`;
                 connection.query(queryReturn,function(err){
                     console.log("err : ",err);

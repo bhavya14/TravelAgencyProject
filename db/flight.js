@@ -38,7 +38,7 @@ function addFlight(data , bid,callback){
         console.log(query);
         connection.query(query,function(err){
             console.log(err);
-            if(data.returnDate!=null){
+            if(data.returnDate.length!=0){
                 var queryReturn = `insert into flight(Bid,Flight_number,Airport_start ,Airport_land,duration, Start_date) values(${bid},'L98799','${data.dest}','${data.source}',${duration},'${data.returnDate}')`;
                 connection.query(queryReturn,function(err){
                     console.log("err : ",err);
