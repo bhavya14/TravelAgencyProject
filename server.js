@@ -571,14 +571,13 @@ app.post('/cancel',function (req,res) {
 })
 app.post('/DeleteTheBooking',function (req,res) {
 
-
 var amount;
 var v=req.query.Bid;
 console.log(v);
     var query  = `select * from Payments where Booking_ID = "${v}"`;
-    connection.query(query , function(err,data){
+    connection.query(query, function(err,data){
         amount=data[0].Amount
-console.log(amount);
+        console.log(amount);
         res.render('pages/Cancellation',{
             Bid:req.query.Bid,
             amount:amount

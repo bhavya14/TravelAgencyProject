@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <title>Logged in</title>
 </head>
 <body>
-<h3> Amount Payable : <span><%= price%></span></h3>
+<h3 style="padding: 2% ;background-color:rgba(172,180,159,0.87) "> Amount Payable : <span><%= price%></span></h3>
 <form action="/Payment?Bid=<%=Bid%>" method="post" id="form">
 
     <label><b>Card Type</b></label>
