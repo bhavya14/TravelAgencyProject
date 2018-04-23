@@ -87,8 +87,6 @@ function addContact(data,callback){
 }
 
 function getDetails(username,callback){
-    console.log("twinkle");
-    console.log(username);
     connection.query(`select * from user where username = '${username}'`,function(err,data){
         console.log(err);
         console.log(data);

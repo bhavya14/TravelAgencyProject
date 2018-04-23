@@ -505,15 +505,17 @@ app.post("/Payment",function(req,res){
     var Bid = req.query.Bid;
     console.log("Bid : " ,Bid);
     if(req.body.num.length !=16){
-        res.send({
-            "code":400,
-            "failed":"Card number incorrect"
-        })
+        res.end("Card number incorrect")
     }else if (req.body.cvv.length !=3){
         res.end("cvv incorrect")
     }else{
         paydb.addPayment(Bid,req.body.method,req.body.price,function(){
-            res.render('pages/Successful')
+            bdb.getUser(Bid,function(username){
+                res.render('pages/Successful',{
+                    username:username
+                })
+            })
+
         })
     }
 
