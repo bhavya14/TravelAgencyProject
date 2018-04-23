@@ -56,14 +56,16 @@
         document.getElementById("myDate").setAttribute("max", maxDate);
         var count =1 ;
         $('#add').click(function () {
-            console.log("here");
-            var field = document.createElement("input");
-            field.setAttribute("name","Contact" + count);
-            field.setAttribute("type","number");
-            field.setAttribute("minlength","10");
-            field.setAttribute("placeholder","Contact")
-            document.getElementById('form').appendChild(field);
-            count= count+1;
+            if(count<3) {
+                console.log("here");
+                var field = document.createElement("input");
+                field.setAttribute("name", "Contact" + count);
+                field.setAttribute("type", "number");
+                field.setAttribute("minlength", "10");
+                field.setAttribute("placeholder", "Contact")
+                document.getElementById('form').appendChild(field);
+                count = count + 1;
+            }
         });
 
     });
