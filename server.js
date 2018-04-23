@@ -27,17 +27,11 @@ app.post("/profile" ,function(req,res){ // User Page
         console.log("Data is");
         console.log(data);
         if(data==undefined)
-        {  res.send({
-            "code":400,
-            "failed":"The username does not exist"
-        })
+        {  res.end("The username does not exist")
         }
         else if(data.length==0)
         {
-            res.send({
-                "code":400,
-                "failed":"Incorrect password"
-            })
+            res.end("Incorrect password")
         }
         else {
             res.render('pages/profile', {
@@ -60,15 +54,9 @@ app.post('/booking',function (req,res) {
 
         console.log("In");
         console.log(req.body.returnDate.length);
-        res.send({
-            "code":400,
-            "failed":"Check return date"
-        })
+        res.end("Check return date")
     }else if(req.body.source == req.body.dest){
-        res.send({
-            "code":400,
-            "failed":"Source And Destination cannot be same "
-        })
+        res.end("Source And Destination cannot be same ")
     } else {
 
         placedb.placename(req.body.source, function (data) {
@@ -159,20 +147,14 @@ app.post('/booking',function (req,res) {
                     console.log(dd);
                     if (dd == 0) {
 
-                        res.send({
-
-                            "failed": "Enter a correct destination name"
-                        })
+                        res.end( "Enter a correct destination name")
                     }
                 });
             }
             console.log(ss);
             if (ss == 0) {
 
-                res.send({
-
-                    "failed": "Enter a correct source name"
-                })
+                res.end("Enter a correct source name")
             }
         });
     }
@@ -222,7 +204,12 @@ app.post('/userdetails',function (req,res) {
 
     if(req.body.proof==1)
     {
-        if(req.body.nproof.length==12)
+        if(req.body.nproof != parseInt(req.body.nproof)){
+            res.end("please enter valid aadhar card number");
+        }else if(req.body.Contact0!= parseInt(req.body.Contact0)){
+            res.end("please enter valid contact number");
+        }
+        else if(req.body.nproof.length==12)
         {
             console.log("Yes it is 12");
 
@@ -243,10 +230,6 @@ app.post('/userdetails',function (req,res) {
                         })
 
                     })
-                    res.send({
-
-                        "success":"Successful sign up"
-                    })
 
                 }
                 else
@@ -261,10 +244,7 @@ app.post('/userdetails',function (req,res) {
         }
         else
         {
-            res.send({
-                "code":400,
-                "failed":"Enter correct Id Proof Number"
-            })
+            res.end("Enter correct Id Proof Number")
         }
 
 
@@ -291,35 +271,22 @@ app.post('/userdetails',function (req,res) {
                             })
                             console.log("Done")
                         })
-                        res.send({
-
-                            "success":"Successful sign up"
-                        })
 
                     }
                     else
                     {
-                        res.send({
-                            "code":400,
-                            "failed":"This username is already taken"
-                        })
+                        res.end("This username is already taken")
                     }
                     // When doesnt match data.length==0
                 });
             }
             else
             {
-                res.send({
-                    "code":400,
-                    "failed":"Enter correct Id Proof Number"
-                })
+                res.end("Enter correct Id Proof Number")
             }
         }
         else {
-            res.send({
-                "code":400,
-                "failed":"Enter correct Id Proof Number"
-            })
+            res.end("Enter correct Id Proof Number")
         }
 
     }
@@ -342,28 +309,17 @@ app.post('/userdetails',function (req,res) {
                         })
                         console.log("Done")
                     })
-                    res.send({
-
-                        "success":"Successful sign up"
-                    })
-
                 }
                 else
                 {
-                    res.send({
-                        "code":400,
-                        "failed":"This username is already taken"
-                    })
+                    res.end("This username is already taken")
                 }
                 // When doesnt match data.length==0
             });
         }
         else
         {
-            res.send({
-                "code":400,
-                "failed":"Enter correct Id Proof Number"
-            })
+            res.end("Enter correct Id Proof Number")
         }
 
 
@@ -491,17 +447,11 @@ app.post("/eprofile",function (req,res) {
     edb.display(req.body.username3,req.body.password3,function (data) {
 
         if(data==undefined)
-        {  res.send({
-            "code":400,
-            "failed":"The employee account does not exist"
-        })
+        {  res.end("The employee account does not exist")
         }
         else if(data.length==0)
         {
-            res.send({
-                "code":400,
-                "failed":"Incorrect password"
-            })
+            res.end("Incorrect password")
         }
         else {
 
@@ -560,10 +510,7 @@ app.post("/Payment",function(req,res){
             "failed":"Card number incorrect"
         })
     }else if (req.body.cvv.length !=3){
-        res.send({
-            "code":400,
-            "failed":"cvv incorrect"
-        })
+        res.end("cvv incorrect")
     }else{
         paydb.addPayment(Bid,req.body.method,req.body.price,function(){
             res.render('pages/Successful')

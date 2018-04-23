@@ -65,7 +65,7 @@ function addContact(data,callback){
     connection.query(`insert into user_contact values("${data.uname}" , ${data.Contact0})`,function(err){
         console.log(err);
 
-      if(Object.keys(data).length >=11){
+      if(Object.keys(data).length >11){
           var i=1;
           for (  ;i<= (Object.keys(data).length -11 );i++){
               console.log("entered contact entering loop");
@@ -82,6 +82,7 @@ function addContact(data,callback){
               })
           }
       }
+        callback();
     })
 }
 
