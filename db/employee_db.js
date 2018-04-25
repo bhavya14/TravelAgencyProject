@@ -64,7 +64,7 @@ function Connect() {
 
 function createEmployee() {
     var query =
-        "create table employee(Eid int PRIMARY KEY,"+
+        "create table  IF NOT EXISTS employee(Eid int PRIMARY KEY,"+
         "FirstName varchar(255) NOT NULL,"+
         "LastName varchar(255)," +
         "Email_id varchar(255) NOT NULL," +
@@ -87,7 +87,7 @@ function createEmployee() {
 
 function employeeContact() {
     var query =
-        "create table employee_contact(Eid int REFERENCES employee(Eid),Contact int NOT NULL)"
+        "create table  IF NOT EXISTS employee_contact(Eid int REFERENCES employee(Eid),Contact int NOT NULL)"
     connection.query(query,
         function(err,results,fields){
             console.log(err)

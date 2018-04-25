@@ -13,7 +13,7 @@ function Connect() {
 
 
 function createPlace() {
-    var query  = "create table Place(Pid int PRIMARY KEY auto_increment, Name varchar(255) NOT NULL)"
+    var query  = "create table  IF NOT EXISTS Place(Pid int PRIMARY KEY auto_increment, Name varchar(255) NOT NULL)"
     connection.query(query,
         function(err,results,fields){
             console.log(err)

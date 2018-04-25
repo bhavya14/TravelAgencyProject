@@ -12,7 +12,7 @@ function Connect() {
 
 function createHotel() {
     var query =
-        "create table HotelReserve(Hid int PRIMARY KEY,"+
+        "create table  IF NOT EXISTS HotelReserve(Hid int PRIMARY KEY,"+
         "Bid int REFERENCES(Bookings(Bid)),"+
         "Hno int,"+
         "Rooms int"
@@ -26,7 +26,7 @@ function createHotel() {
 
 function employeeContact() {
     var query =
-        "create table employee_contact(Eid int REFERENCES employee(Eid),Contact int NOT NULL)"
+        "create table  IF NOT EXISTS employee_contact(Eid int REFERENCES employee(Eid),Contact int NOT NULL)"
     connection.query(query,
         function(err,results,fields){
             console.log(err)

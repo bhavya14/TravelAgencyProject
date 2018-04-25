@@ -14,7 +14,7 @@ function Connect() {
 function createPackage() {
 
 
-    var query  = "create table Package(Pcode int PRIMARY KEY , type varchar(255) NOT NULL,facilities varchar(255) , fees int(40) ," +
+    var query  = "create table  IF NOT EXISTS Package(Pcode int PRIMARY KEY , type varchar(255) NOT NULL,facilities varchar(255) , fees int(40) ," +
         " OtherDetails varchar(255))"
 
     connection.query(query,

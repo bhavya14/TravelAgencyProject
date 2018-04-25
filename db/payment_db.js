@@ -14,7 +14,7 @@ function Connect() {
 function MakePaymenttable()
 {
     var query =
-        "create table Payments(Payment_ID int PRIMARY KEY,"+
+        "create table  IF NOT EXISTS Payments(Payment_ID int PRIMARY KEY,"+
         "Booking_ID int REFERENCES Bookings(Bid)," +
         "method varchar(100)," +
         "Status varchar(100) NOT NULL," +

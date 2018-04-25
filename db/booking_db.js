@@ -12,7 +12,7 @@ function Connect() {
 }
 function createtables() {
 var query=
-        "create table Bookings(Bid int auto_increment PRIMARY KEY,"+
+        "create table  IF NOT EXISTS Bookings(Bid int auto_increment PRIMARY KEY,"+
         "Eid int REFERENCES employee(Eid)," +
         "user_id int REFERENCES user(user_id),"+
         "Package_code int REFERENCES Package(Pcode)," +
@@ -33,7 +33,7 @@ var query=
 
 function bookingmember() {
     var query=
-        "create table Booking_member(Bid int REFERENCES Bookings,"+
+        "create table  IF NOT EXISTS Booking_member(Bid int REFERENCES Bookings,"+
         "proof_type varchar(100), " +
         "id_proof_number int,"+
         "name varchar(100)," +

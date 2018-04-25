@@ -11,7 +11,7 @@ function Connect() {
 }
 function createUser(){
     var query =
-        "create table user(user_id int auto_increment PRIMARY KEY,"+
+        "create table IF NOT EXISTS user(user_id int auto_increment PRIMARY KEY,"+
         "FirstName varchar(255) NOT NULL,"+
         "LastName varchar(255)," +
         "Username varchar(255) NOT NULL,"+

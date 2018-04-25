@@ -13,7 +13,7 @@ function Connect() {
 
 function createTable(){
     var query=
-        "create table Bus(Bid int ,"+
+        "create table  IF NOT EXISTS Bus(Bid int ,"+
         "Start_date Date, " +
         "Reach_date Date,"+
         "Bus_Number varchar(200)," +
