@@ -219,6 +219,8 @@ app.post('/userdetails',function (req,res) {
     console.log(req.body);
     console.log(req.body.fname);
 
+
+
     if(req.body.proof==1)
     {
         if(req.body.nproof.length==12)

@@ -24,7 +24,7 @@
     <label><b>Email</b></label>
     <input type=email placeholder="Email" name="mail" id="mail" required></br>
     <label><b>Date Of Birth</b></label>
-    <input type="date" id="myDate" name="dob" max ="2018-4-8" required></br>
+    <input type="date" id="myDate" name="dob"required></br>
     <label><b>Address</b></label>
     <input type="text" placeholder="Address" name="address" id="address" ></br>
     <label><b>ID PROOF TYPE</b></label>
@@ -41,7 +41,7 @@
     <INPUT TYPE="Radio" Name="Gender" Value="F" id="F">Female
     </br>
     <label><b>Contact Number</b></label>
-    <input type="number" name="Contact0" minlength="10" required ></br>
+    <input type="text" name="Contact0" minlength="10" pattern="[789][0-9]{9}" required ></br>
     <button type=button id="add">Add Contact</button>
     <button type="submit" id="submit" value="Book">Sign Up</button>
 </form>
@@ -58,6 +58,7 @@
             day = '0' + day.toString();
         var maxDate = year + '-' + month + '-' + day;
         document.getElementById("myDate").setAttribute("max", maxDate);
+        document.getElementById("myDate").setAttribute("min", '1944-01-01');
         var count =1 ;
         $('#add').click(function () {
             console.log("here");
