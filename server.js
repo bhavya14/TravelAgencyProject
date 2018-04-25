@@ -88,16 +88,20 @@ app.post('/booking',function (req,res) {
                                     console.log("data : ", FlightData);
                                     console.log(FlightData[1]);
 
-                                    bdb.addMembers(originalData, bid, function () {
-                                        console.log("in here after all additions")
-                                        res.render('pages/BookingDetails', {
-                                            data: originalData,
-                                            Bid: Bid,
-                                            Details: Details,
-                                            ReturnDetails: ReturnDetails,
-                                            name: req.query.name,
-                                            ShowPayment : true
-                                        })
+                                    bdb.addMembers(originalData, bid, function (status,err1) {
+                                        if(status !=1) {
+                                            console.log("in here after all additions")
+                                            res.render('pages/BookingDetails', {
+                                                data: originalData,
+                                                Bid: Bid,
+                                                Details: Details,
+                                                ReturnDetails: ReturnDetails,
+                                                name: req.query.name,
+                                                ShowPayment: true
+                                            })
+                                        }else{
+                                            res.end(err1);
+                                        }
                                     })
                                 })
                             } else if (originalData.travelMode == 2) {
@@ -107,17 +111,20 @@ app.post('/booking',function (req,res) {
                                     console.log("data : ", TrainData);
                                     console.log(TrainData[1]);
 
-                                    bdb.addMembers(originalData, bid, function () {
-                                        console.log("in here after all additions")
-                                        res.render('pages/BookingDetails', {
-                                            data: originalData,
-                                            Bid: Bid,
-                                            Details: Details,
-                                            ReturnDetails: ReturnDetails,
-                                            name: req.query.name,
-                                            ShowPayment : true
-
-                                        })
+                                    bdb.addMembers(originalData, bid, function (status,err1) {
+                                        if(status !=1) {
+                                            console.log("in here after all additions")
+                                            res.render('pages/BookingDetails', {
+                                                data: originalData,
+                                                Bid: Bid,
+                                                Details: Details,
+                                                ReturnDetails: ReturnDetails,
+                                                name: req.query.name,
+                                                ShowPayment: true
+                                            })
+                                        }else{
+                                            res.end(err1);
+                                        }
                                     })
                                 })
 
@@ -128,17 +135,20 @@ app.post('/booking',function (req,res) {
                                     console.log("data : ", BusData);
                                     console.log(BusData[1]);
 
-                                    bdb.addMembers(originalData, bid, function () {
-                                        console.log("in here after all additions")
-                                        res.render('pages/BookingDetails', {
-                                            data: originalData,
-                                            Bid: Bid,
-                                            Details: Details,
-                                            ReturnDetails: ReturnDetails,
-                                            name: req.query.name,
-                                            ShowPayment : true
-
-                                        })
+                                    bdb.addMembers(originalData, bid, function (status,err1) {
+                                        if(status !=1) {
+                                            console.log("in here after all additions")
+                                            res.render('pages/BookingDetails', {
+                                                data: originalData,
+                                                Bid: Bid,
+                                                Details: Details,
+                                                ReturnDetails: ReturnDetails,
+                                                name: req.query.name,
+                                                ShowPayment: true
+                                            })
+                                        }else{
+                                            res.end(err1);
+                                        }
                                     })
                                 })
                             }

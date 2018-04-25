@@ -106,18 +106,53 @@ function addMembers(originalData,Bid,callback){
         var key3  = "IDProofNumber" + i;
         var key4 = "Age" + i;
         var query = `insert into Booking_member values(${Bid} ,'${originalData[key2]}','${originalData[key3]}','${originalData[key1]}',${originalData[key4]})`
-        connection.query(query,function(err){
-            console.log(err);
-            if(err ==null){
+        connection.query(query,function(err1){
+            if(err1 ==null){
                 if(i>=(Object.keys(originalData).length -5 /4) - 1){
                     console.log(i , "in here")
-                    callback();
+                    callback(0,null);
                 }
+                callback(0,null);
+            }else{
+                console.log("err1 : " , err1);
+                console.log("original data : " ,originalData);
+                if(originalData.travelMode ==='1'){
+                    console.log("idhar aa gaye");
+                    connection.query(`delete from flight where Bid = ${Bid}`,function(err2){
+                        console.log("err2 : " , err2);
+                        connection.query(`delete from Bookings where Bid = ${Bid}`,function(err3){
+                            console.log("err3 : " ,err3);
+                            connection.query(`delete from Booking_member where Bid = ${Bid}`,function(err4) {
+                                console.log("err4 : " ,err4);
+                                callback(1,err1.sqlMessage);
+                            })
+                        })
+                    })
+                }else if(originalData.travelMode ==='2'){
+                    connection.query(`delete from train where Bid = ${Bid}`,function(){
+                        connection.query(`delete from Bookings where Bid = ${Bid}`,function(err){
+                            console.log(err);
+                            connection.query(`delete from Booking_member where Bid = ${Bid}`,function(err) {
+                                console.log("err : " ,err);
+                                callback(1,err1.sqlMessage);
+                            })
+                        })
+                    })
+                }else if(originalData.travelMode ==='3'){
+                    connection.query(`delete from bus where Bid = ${Bid}`,function(){
+                        connection.query(`delete from Bookings where Bid = ${Bid}`,function(err){
+                            console.log(err);
+                            connection.query(`delete from Booking_member where Bid = ${Bid}`,function(err) {
+                                console.log("err : " ,err);
+                                callback(1,err1.sqlMessage);
+                            })
+                        })
+                    })
+                }
+
             }
         })
     }
-
-    callback();
 
 }
 
