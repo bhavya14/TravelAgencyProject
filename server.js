@@ -75,6 +75,18 @@ app.post('/booking',function (req,res) {
                         dd = (data[0].Pid);
                         // addBooking(originalData,username);
                         // console.log("start date:" , originalData.startDate);
+
+
+                        bdb.check_booking(originalData.source, originalData.dest, originalData.startDate, username, 
+                        function (data){
+                            if(data)
+                            {
+                                res.end("You have already made a booking with the same details.")
+                            }
+                        }
+                     )
+                         
+
                         bdb.add(originalData.source, originalData.dest, originalData.startDate, originalData.returnDate, username, Math.floor(Math.random() * 222222), Math.floor(Math.random() * 3), function (bid) {
                             console.log("Added a booking");
                             Bid = bid;

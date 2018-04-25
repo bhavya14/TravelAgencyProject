@@ -77,6 +77,16 @@ function add(source, destination,startdate,returnDate,username, pnr,eid,callback
 
 }
 
+
+function check_booking(source, destination,startdate,username,callback) {
+  
+    connection.query('select * from Bookings where travel_from = "' + source + '" AND travel_to = "'+destination+'" AND start_date= "' +startdate+'" AND username="'+username+'";',
+    function(err, data){
+        callback(data.length)
+    } )
+
+}
+
 function display() {
     connection.query('select * from bookings', function(err,data) {
         console.log("data : " , data)
@@ -190,5 +200,6 @@ module.exports = {
     displayUserHistory: displayUserHistory,
     addMembers:addMembers,
     fetchData:fetchData,
-    getUser:getUser
+    getUser:getUser,
+    check_booking : check_booking
 }
