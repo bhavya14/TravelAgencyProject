@@ -49,7 +49,7 @@ app.post('/booking',function (req,res) {
     var Bid;
     var ss;
     var dd;
-    if(req.body.startDate>req.body.returnDate && req.body.returnDate.length!=0)
+    if(req.body.startDate>req.body.returnDate && req.body.returnDate.trim().length!=0)
     {
 
         console.log("In");
@@ -209,7 +209,7 @@ app.post('/userdetails',function (req,res) {
         }else if(req.body.Contact0!= parseInt(req.body.Contact0)){
             res.end("please enter valid contact number");
         }
-        else if(req.body.nproof.length==12)
+        else if(req.body.nproof.trim().length==12)
         {
             console.log("Yes it is 12");
 
@@ -251,7 +251,7 @@ app.post('/userdetails',function (req,res) {
 //     console.log(req.body.nproof.substring(0,4));
 //     console.log("second");
 //     console.log(req.body.nproof.substring(0,4).match((/[0-9]/i)));
-        if(req.body.nproof.substring(0,5).match((/[0-9]/i))==null &&req.body.nproof.length==10)
+        if(req.body.nproof.substring(0,5).match((/[0-9]/i))==null &&req.body.nproof.trim().length==10)
         {
             if(req.body.nproof.substring(5,9).match((/[a-z]/i))==null && req.body.nproof.substring(9,10).match((/[0-9]/i))==null)
             {
@@ -289,7 +289,7 @@ app.post('/userdetails',function (req,res) {
     }
     if(req.body.proof==3)
     {
-        if(req.body.nproof.length==9)
+        if(req.body.nproof.tirm().length==9)
         {
             console.log("Yes it is 12");
 
@@ -499,9 +499,9 @@ app.post("/Pay" , function(req,res){
 app.post("/Payment",function(req,res){
     var Bid = req.query.Bid;
     console.log("Bid : " ,Bid);
-    if(req.body.num.length !=16){
+    if((req.body.num.trim().length !=16) || req.body.num != parseInt (req.body.num)){
         res.end("Card number incorrect")
-    }else if (req.body.cvv.length !=3){
+    }else if ((req.body.cvv.trim().length !=3) || (req.body.num != parseInt (req.body.num))){
         res.end("cvv incorrect")
     }else{
         paydb.addPayment(Bid,req.body.method,req.body.price,function(){
