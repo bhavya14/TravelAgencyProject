@@ -53,11 +53,142 @@ app.post("/profile" ,function(req,res){ // User Page
 app.post('/booking',function (req,res) {
 
     var originalData=req.body;
-    var username = req.query.name;
     var Bid;
-    var ss;
-    var dd;
-    if(req.body.startDate>req.body.returnDate)
+    var username = req.query.name;
+    console.log("Here in -----------------------");
+console.log(req.body.travelMode);
+if(req.body.startDate==req.body.returnDate)
+{
+
+    var v=0;
+    placedb.fetchPrice(req.body.source,req.body.dest,function (data) {
+        console.log("The price fethed is"+ data[0].duration);
+        var duration=data[0].duration;
+
+        if(req.body.travelMode==1)
+        {
+            v=duration;
+        }
+        else if(req.body.travelMode==2)
+        {
+            v=duration+10;
+        }
+        else if(req.body.travelMode==3)
+        {
+            v=duration+15;
+        }
+        if(v>13)
+        {
+            res.end({
+                "code":400,
+                "failed":"The return date is same as the booking date"
+            })
+
+        }
+        else
+        {
+
+            ss = (data[0].Pid);
+            placedb.placename(req.body.dest, function (data) {
+                console.log(data);
+                if (data.length == 0) {
+                    dd = 0;
+                }
+                else {
+                    dd = (data[0].Pid);
+
+
+
+                    // addBooking(originalData,username);
+                    // console.log("start date:" , originalData.startDate);
+                    bdb.add(originalData.source, originalData.dest, originalData.startDate, originalData.returnDate, username, Math.floor(Math.random() * 222222), Math.floor(Math.random() * 3), function (bid) {
+                        console.log("Added a booking");
+                        Bid = bid;
+                        console.log(Bid);
+                        if (originalData.travelMode == 1) {
+                            // flight selected
+                            //      console.log("inside :", originalData);
+                            flight.addFlight(originalData, Bid, function (FlightData) {
+                                Details = FlightData[0];
+                                ReturnDetails = FlightData[1];
+                                console.log("data : ", FlightData);
+                                console.log(FlightData[1]);
+
+                                bdb.addMembers(originalData, bid, function () {
+                                    console.log("in here after all additions")
+                                    res.render('pages/BookingDetails', {
+                                        data: originalData,
+                                        Bid: Bid,
+                                        Details: Details,
+                                        ReturnDetails: ReturnDetails,
+                                        name: req.query.name,
+                                        ShowPayment : true
+                                    })
+                                })
+                            })
+                        } else if (originalData.travelMode == 2) {
+                            train.addTrain(originalData, Bid, function (TrainData) {
+                                Details = TrainData[0];
+                                ReturnDetails = TrainData[1];
+                                console.log("data : ", TrainData);
+                                console.log(TrainData[1]);
+
+                                bdb.addMembers(originalData, bid, function () {
+                                    console.log("in here after all additions")
+                                    res.render('pages/BookingDetails', {
+                                        data: originalData,
+                                        Bid: Bid,
+                                        Details: Details,
+                                        ReturnDetails: ReturnDetails,
+                                        name: req.query.name,
+                                        ShowPayment : true
+
+                                    })
+                                })
+                            })
+
+                        } else {
+                            bus.addBus(originalData, Bid, function (BusData) {
+                                Details = BusData[0];
+                                ReturnDetails = BusData[1];
+                                console.log("data : ", BusData);
+                                console.log(BusData[1]);
+
+                                bdb.addMembers(originalData, bid, function () {
+                                    console.log("in here after all additions")
+                                    res.render('pages/BookingDetails', {
+                                        data: originalData,
+                                        Bid: Bid,
+                                        Details: Details,
+                                        ReturnDetails: ReturnDetails,
+                                        name: req.query.name,
+                                        ShowPayment : true
+
+                                    })
+                                })
+                            })
+                        }
+                    });
+                }
+                console.log(dd);
+                if (dd == 0) {
+
+                    res.send({
+
+                        "failed": "Enter a correct destination name"
+                    })
+                }
+            });
+        }
+
+
+    })
+
+
+}
+
+
+   else if(req.body.startDate>req.body.returnDate)
     {
         console.log("In");
         res.send({
@@ -85,6 +216,9 @@ app.post('/booking',function (req,res) {
                     }
                     else {
                         dd = (data[0].Pid);
+
+
+
                         // addBooking(originalData,username);
                         // console.log("start date:" , originalData.startDate);
                         bdb.add(originalData.source, originalData.dest, originalData.startDate, originalData.returnDate, username, Math.floor(Math.random() * 222222), Math.floor(Math.random() * 3), function (bid) {

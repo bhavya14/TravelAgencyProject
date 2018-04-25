@@ -47,6 +47,10 @@ function fetchPrice(source,destination,callback){
         }
     })
 }
+
+
+
+
 module.exports={
     placename:placename,
     allPlaces:allPlaces,
