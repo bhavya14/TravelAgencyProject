@@ -94,7 +94,7 @@ function displayUserHistory(username,callback){
 
 function addMembers(originalData,Bid,callback){
 
-    console.log(originalData)
+    console.log("originaldata : " , originalData)
     if(Object.keys(originalData).length === 5){
         console.log("going back")
         callback();

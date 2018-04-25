@@ -165,11 +165,11 @@ app.post('/BookingDetailsInHistory',function(req,res){
    connection.query(`select * from Bookings where Bid = ${Bid}`,function(err,data){
         console.log(err);
         console.log(data[0]);
-        var query  = `(select Flight_Number as Flight_Number,Airport_start as Airport_start,Airport_land as Airport_land,Start_date,Duration,null as Train_Number,null as RailwayStation_start,null as RailwayStation_reach,null as Bus_number,null as BusStop_start, null as BusStop_reach from Flight where Bid = ${Bid} ) 
+        var query  = `(select Flight_Number as Flight_Number,Airport_start as Airport_start,Airport_land as Airport_land,Start_date,Duration,Time,null as Train_Number,null as RailwayStation_start,null as RailwayStation_reach,null as Bus_number,null as BusStop_start, null as BusStop_reach from Flight where Bid = ${Bid} ) 
                         UNION ALL 
-                        (select null as Flight_Number,null as Airport_start, null as Airport_land ,Start_date,Duration,Train_Number as Train_Number,RailwayStation_start as RailwayStation_start,RailwayStation_reach as RailwayStation_reach,null as Bus_Number,null as BusStop_reach,null as BusStop_start from Train where Bid = ${Bid}) 
+                        (select null as Flight_Number,null as Airport_start, null as Airport_land ,Start_date,Duration,Time,Train_Number as Train_Number,RailwayStation_start as RailwayStation_start,RailwayStation_reach as RailwayStation_reach,null as Bus_Number,null as BusStop_reach,null as BusStop_start from Train where Bid = ${Bid}) 
                         UNION ALL
-                        (select null as Flight_Number,null as Airport_start, null as Airport_land ,Start_date,Duration,null as Train_Number,null as RailwayStation_start,null as RailwayStation_reach,Bus_Number as Bus_Number,BusStop_reach as BusStop_reach,BusStop_start as BusStop_start from Bus where Bid = ${Bid})`;
+                        (select null as Flight_Number,null as Airport_start, null as Airport_land ,Start_date,Duration,Time,null as Train_Number,null as RailwayStation_start,null as RailwayStation_reach,Bus_Number as Bus_Number,BusStop_reach as BusStop_reach,BusStop_start as BusStop_start from Bus where Bid = ${Bid})`;
         connection.query(query ,function(err,TravelData){
 
             Details = TravelData[0];
@@ -234,10 +234,7 @@ app.post('/userdetails',function (req,res) {
                 }
                 else
                 {
-                    res.send({
-                        "code":400,
-                        "failed":"This username is already taken"
-                    })
+                    res.end("This username is already taken")
                 }
                 // When doesnt match data.length==0
             });
@@ -360,8 +357,6 @@ app.post('/UserHistory',function(req,res){
         console.log("bookings is :::");
         console.log(Bookings);
     })
-
-
 
     var query = `select Bid,name,age,id_proof_number from Bookings join Booking_member using (Bid) where Bookings.username = "${username}" `;
     connection.query(query,function(err,data) {

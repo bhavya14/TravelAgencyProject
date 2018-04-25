@@ -16,13 +16,9 @@ function MakePaymenttable()
     var query =
         "create table Payments(Payment_ID int PRIMARY KEY,"+
         "Booking_ID int REFERENCES Bookings(Bid)," +
-        "Payment_Date DATE," +
-        "type varchar(100)," +
-        "number varchar(12)," +
-        "cvv varchar(3)," +
+        "method varchar(100)," +
         "Status varchar(100) NOT NULL," +
-        "Amount int NOT NULL,"+
-        "Pcode int REFERENCES Package(Pcode)"
+        "Amount int NOT NULL)"
     connection.query(query,
         function(err,results,fields){
             console.log(err)

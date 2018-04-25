@@ -40,7 +40,7 @@ function allPlaces(callback){
 }
 
 function fetchPrice(source,destination,callback){
-    connection.query(`select* from master where source = "${source}" AND destination = "${destination}"` , function(err,data){
+    connection.query(`select* from master where (source = "${source}" AND destination = "${destination}") OR (source = "${destination}" AND destination = "${source}")` , function(err,data){
         console.log("Price data : " , data)
         if(err == null){
             callback(data);

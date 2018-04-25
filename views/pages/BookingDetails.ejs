@@ -89,7 +89,8 @@
                 <td> Flight number </td>
                 <td> Departure from</td>
                 <td> Arrival At</td>
-                <td> Date and Time of Departure </td>
+                <td> Date of Departure </td>
+                <td>Time of Departure</td>
                 <td> Duration </td>
             </tr>
             <tr>
@@ -98,6 +99,7 @@
                 <td><%= Details.Airport_start%></td>
                 <td><%= Details.Airport_land%></td>
                 <td><%= Details.Start_date%></td>
+                <td><%= Details.Time%></td>
                 <td><%= Details.Duration%></td>
             </tr>
             <tr>
@@ -107,6 +109,7 @@
                 <td><%= ReturnDetails.Airport_start%></td>
                 <td><%= ReturnDetails.Airport_land%></td>
                 <td><%= ReturnDetails.Start_date%></td>
+                <td><%= ReturnDetails.Time%></td>
                 <td><%= ReturnDetails.Duration%></td>
             </tr>
             <%}%>
@@ -121,7 +124,8 @@
                 <td> Train number </td>
                 <td> Departure from</td>
                 <td> Arrival At</td>
-                <td> Date and Time of Departure </td>
+                <td> Date of Departure </td>
+                <td>Time of Departure</td>
                 <td> Duration </td>
             </tr>
             <tr>
@@ -130,6 +134,7 @@
                 <td><%= Details.RailwayStation_start%></td>
                 <td><%= Details.RailwayStation_reach%></td>
                 <td><%= Details.Start_date%></td>
+                <td><%= Details.Time%></td>
                 <td><%= Details.Duration%></td>
             </tr>
             <% if(ReturnDetails != undefined){ %>
@@ -139,6 +144,7 @@
                 <td><%= ReturnDetails.RailwayStation_start%></td>
                 <td><%= ReturnDetails.RailwayStation_reach%></td>
                 <td><%= ReturnDetails.Start_date%></td>
+                <td><%= ReturnDetails.Time%></td>
                 <td><%= ReturnDetails.Duration%></td>
             </tr>
             <%}%>
@@ -153,7 +159,8 @@
                 <td> Bus number </td>
                 <td> Departure from</td>
                 <td> Arrival At</td>
-                <td> Date and Time of Departure </td>
+                <td> Date of Departure </td>
+                <td>Time of Departure</td>
                 <td> Duration </td>
             </tr>
             <tr>
@@ -162,6 +169,7 @@
                 <td><%= Details.BusStop_start%></td>
                 <td><%= Details.BusStop_reach%></td>
                 <td><%= Details.Start_date%></td>
+                <td><%= Details.Time%></td>
                 <td><%= Details.Duration%></td>
             </tr>
             <% if(ReturnDetails != undefined){ %>
@@ -171,6 +179,7 @@
                 <td><%= ReturnDetails.BusStop_start%></td>
                 <td><%= ReturnDetails.BusStop_reach%></td>
                 <td><%= ReturnDetails.Start_date%></td>
+                <td><%= ReturnDetails.Time%></td>
                 <td><%= ReturnDetails.Duration%></td>
             </tr>
             <% }%>
