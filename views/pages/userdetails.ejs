@@ -41,7 +41,7 @@
     <INPUT TYPE="Radio" Name="Gender" Value="F" id="F">Female
     </br>
     <label><b>Contact Number</b></label>
-    <input type="number" name="Contact0" minlength="10" required ></br>
+    <input type="text" name="Contact0" minlength="10" pattern="[789][0-9]{9}" required ></br>
     <button type=button id="add">Add Contact</button>
     <button type="submit" id="submit" value="Book">Sign Up</button>
 </form>
@@ -57,7 +57,11 @@
         if(day < 10)
             day = '0' + day.toString();
         var maxDate = year + '-' + month + '-' + day;
+
+        var yearmin = dtToday.getFullYear() - 75;
+        var minDate = yearmin + '-' + month + '-' + day;
         document.getElementById("myDate").setAttribute("max", maxDate);
+        document.getElementById("myDate").setAttribute("min", minDate);
         var count =1 ;
         $('#add').click(function () {
             if(count<3) {
