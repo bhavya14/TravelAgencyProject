@@ -289,7 +289,7 @@ app.post('/userdetails',function (req,res) {
     }
     if(req.body.proof==3)
     {
-        if(req.body.nproof.tirm().length==9)
+        if(req.body.nproof.trim().length==9)
         {
             console.log("Yes it is 12");
 
