@@ -68,9 +68,10 @@
                 console.log("here");
                 var field = document.createElement("input");
                 field.setAttribute("name", "Contact" + count);
-                field.setAttribute("type", "number");
+                field.setAttribute("type", "text");
                 field.setAttribute("minlength", "10");
-                field.setAttribute("placeholder", "Contact")
+                field.setAttribute("placeholder", "Contact");
+                field.setAttribute("pattern","[789][0-9]{9}");
                 document.getElementById('form').appendChild(field);
                 count = count + 1;
             }
