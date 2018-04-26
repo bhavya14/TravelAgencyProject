@@ -51,134 +51,302 @@ app.post('/booking',function (req,res) {
     var dd;
     if(req.body.startDate>req.body.returnDate && req.body.returnDate.trim().length!=0)
     {
-
         console.log("In");
         console.log(req.body.returnDate.length);
         res.end("Check return date")
     }else if(req.body.source == req.body.dest){
         res.end("Source And Destination cannot be same ")
-    } else {
+    } else if(req.body.startDate==req.body.returnDate){
+            var v=0;
+            placedb.fetchPrice(req.body.source,req.body.dest,function (data) {
+                console.log("The price fethed is" + data[0].duration);
+                var duration = data[0].duration;
 
-        placedb.placename(req.body.source, function (data) {
-            console.log(data);
-            if (data.length == 0) {
-                ss = 0;
+                if (req.body.travelMode == 1) {
+                    v = duration;
+                }
+                else if (req.body.travelMode == 2) {
+                    v = duration + 10;
+                }
+                else if (req.body.travelMode == 3) {
+                    v = duration + 15;
+                }
+                if (v > 13) {
+                    res.end("you will not be able to cover the distance in the given time.Please select a different return date")
+                }else{
+                    placedb.placename(req.body.source, function (data) {
+                        console.log(data);
+                        if (data.length == 0) {
+                            ss = 0;
+                        }
+                        else {
+                            ss = (data[0].Pid);
+                            placedb.placename(req.body.dest, function (data) {
+                                console.log(data);
+                                if (data.length == 0) {
+                                    dd = 0;
+                                }
+                                else {
+                                    dd = (data[0].Pid);
+                                    // addBooking(originalData,username);
+                                    // console.log("start date:" , originalData.startDate);
+
+
+                                    bdb.check_booking(originalData.source, originalData.dest, originalData.startDate, username,
+                                        function (data){
+                                            if(data)
+                                            {
+                                                res.end("You have already made a booking with the same details.")
+                                            }
+                                        }
+                                    )
+
+
+                                    bdb.add(originalData.source, originalData.dest, originalData.startDate, originalData.returnDate, username, Math.floor(Math.random() * 222222), Math.floor(Math.random() * 3), function (bid) {
+                                        console.log("Added a booking");
+                                        Bid = bid;
+                                        console.log(Bid);
+                                        if (originalData.travelMode == 1) {
+                                            // flight selected
+                                            console.log("inside :", originalData);
+                                            flight.addFlight(originalData, Bid, function (FlightData) {
+                                                Details = FlightData[0];
+                                                ReturnDetails = FlightData[1];
+                                                console.log("data : ", FlightData);
+                                                console.log(FlightData[1]);
+
+                                                bdb.addMembers(originalData, bid, function (status,err1) {
+                                                    if(status !=1) {
+                                                        console.log("in here after all additions")
+                                                        res.render('pages/BookingDetails', {
+                                                            data: originalData,
+                                                            Bid: Bid,
+                                                            Details: Details,
+                                                            ReturnDetails: ReturnDetails,
+                                                            name: req.query.name,
+                                                            ShowPayment: true
+                                                        })
+                                                    }else{
+                                                        res.end(err1);
+                                                    }
+                                                })
+                                            })
+                                        } else if (originalData.travelMode == 2) {
+                                            train.addTrain(originalData, Bid, function (TrainData) {
+                                                Details = TrainData[0];
+                                                ReturnDetails = TrainData[1];
+                                                console.log("data : ", TrainData);
+                                                console.log(TrainData[1]);
+
+                                                bdb.addMembers(originalData, bid, function (status,err1) {
+                                                    if(status !=1) {
+                                                        console.log("in here after all additions")
+                                                        res.render('pages/BookingDetails', {
+                                                            data: originalData,
+                                                            Bid: Bid,
+                                                            Details: Details,
+                                                            ReturnDetails: ReturnDetails,
+                                                            name: req.query.name,
+                                                            ShowPayment: true
+                                                        })
+                                                    }else{
+                                                        res.end(err1);
+                                                    }
+                                                })
+                                            })
+
+                                        } else {
+                                            bus.addBus(originalData, Bid, function (BusData) {
+                                                Details = BusData[0];
+                                                ReturnDetails = BusData[1];
+                                                console.log("data : ", BusData);
+                                                console.log(BusData[1]);
+
+                                                bdb.addMembers(originalData, bid, function (status,err1) {
+                                                    if(status !=1) {
+                                                        console.log("in here after all additions")
+                                                        res.render('pages/BookingDetails', {
+                                                            data: originalData,
+                                                            Bid: Bid,
+                                                            Details: Details,
+                                                            ReturnDetails: ReturnDetails,
+                                                            name: req.query.name,
+                                                            ShowPayment: true
+                                                        })
+                                                    }else{
+                                                        res.end(err1);
+                                                    }
+                                                })
+                                            })
+                                        }
+                                    });
+                                }
+                                console.log(dd);
+                                if (dd == 0) {
+
+                                    res.end( "Enter a correct destination name")
+                                }
+                            });
+                        }
+                        console.log(ss);
+                        if (ss == 0) {
+
+                            res.end("Enter a correct source name")
+                        }
+                    });
+                }
+            });
+
+    }else{
+        var v1 = 0;
+        placedb.fetchPrice(req.body.source,req.body.dest,function (data) {
+            console.log("The price fethed is" + data[0].duration);
+            var duration = data[0].duration;
+
+            if (req.body.travelMode == 1) {
+                v1 = duration;
             }
-            else {
-                ss = (data[0].Pid);
-                placedb.placename(req.body.dest, function (data) {
+            else if (req.body.travelMode == 2) {
+                v1 = duration + 10;
+            }
+            else if (req.body.travelMode == 3) {
+                v1 = duration + 20;
+            }
+
+            var datestart =  req.body.startDate.split('-');
+            var datereturn = req.body.returnDate.split('-');
+            console.log(v1);
+            console.log(datestart[1] == datereturn[1]);
+            console.log(datereturn[0] == datestart[0]);
+            console.log(parseInt(datestart[2]) + 1 == parseInt(datereturn[2]))
+            if(v1>21 && datestart[1] == datereturn[1] && datereturn[0] == datestart[0] && parseInt(datestart[2]) + 1 == parseInt(datereturn[2])){
+                res.end("you will not be able to cover the distance in the given time.Please select a different return date")
+
+            }else {
+
+                placedb.placename(req.body.source, function (data) {
                     console.log(data);
                     if (data.length == 0) {
-                        dd = 0;
+                        ss = 0;
                     }
                     else {
-                        dd = (data[0].Pid);
-                        // addBooking(originalData,username);
-                        // console.log("start date:" , originalData.startDate);
-
-
-                        bdb.check_booking(originalData.source, originalData.dest, originalData.startDate, username, 
-                        function (data){
-                            if(data)
-                            {
-                                res.end("You have already made a booking with the same details.")
+                        ss = (data[0].Pid);
+                        placedb.placename(req.body.dest, function (data) {
+                            console.log(data);
+                            if (data.length == 0) {
+                                dd = 0;
                             }
-                        }
-                     )
-                         
+                            else {
+                                dd = (data[0].Pid);
+                                // addBooking(originalData,username);
+                                // console.log("start date:" , originalData.startDate);
 
-                        bdb.add(originalData.source, originalData.dest, originalData.startDate, originalData.returnDate, username, Math.floor(Math.random() * 222222), Math.floor(Math.random() * 3), function (bid) {
-                            console.log("Added a booking");
-                            Bid = bid;
-                            console.log(Bid);
-                            if (originalData.travelMode == 1) {
-                                // flight selected
-                                console.log("inside :", originalData);
-                                flight.addFlight(originalData, Bid, function (FlightData) {
-                                    Details = FlightData[0];
-                                    ReturnDetails = FlightData[1];
-                                    console.log("data : ", FlightData);
-                                    console.log(FlightData[1]);
 
-                                    bdb.addMembers(originalData, bid, function (status,err1) {
-                                        if(status !=1) {
-                                            console.log("in here after all additions")
-                                            res.render('pages/BookingDetails', {
-                                                data: originalData,
-                                                Bid: Bid,
-                                                Details: Details,
-                                                ReturnDetails: ReturnDetails,
-                                                name: req.query.name,
-                                                ShowPayment: true
-                                            })
-                                        }else{
-                                            res.end(err1);
+                                bdb.check_booking(originalData.source, originalData.dest, originalData.startDate, username,
+                                    function (data) {
+                                        if (data) {
+                                            res.end("You have already made a booking with the same details.")
                                         }
-                                    })
-                                })
-                            } else if (originalData.travelMode == 2) {
-                                train.addTrain(originalData, Bid, function (TrainData) {
-                                    Details = TrainData[0];
-                                    ReturnDetails = TrainData[1];
-                                    console.log("data : ", TrainData);
-                                    console.log(TrainData[1]);
+                                    }
+                                )
 
-                                    bdb.addMembers(originalData, bid, function (status,err1) {
-                                        if(status !=1) {
-                                            console.log("in here after all additions")
-                                            res.render('pages/BookingDetails', {
-                                                data: originalData,
-                                                Bid: Bid,
-                                                Details: Details,
-                                                ReturnDetails: ReturnDetails,
-                                                name: req.query.name,
-                                                ShowPayment: true
+
+                                bdb.add(originalData.source, originalData.dest, originalData.startDate, originalData.returnDate, username, Math.floor(Math.random() * 222222), Math.floor(Math.random() * 3), function (bid) {
+                                    console.log("Added a booking");
+                                    Bid = bid;
+                                    console.log(Bid);
+                                    if (originalData.travelMode == 1) {
+                                        // flight selected
+                                        console.log("inside :", originalData);
+                                        flight.addFlight(originalData, Bid, function (FlightData) {
+                                            Details = FlightData[0];
+                                            ReturnDetails = FlightData[1];
+                                            console.log("data : ", FlightData);
+                                            console.log(FlightData[1]);
+
+                                            bdb.addMembers(originalData, bid, function (status, err1) {
+                                                if (status != 1) {
+                                                    console.log("in here after all additions")
+                                                    res.render('pages/BookingDetails', {
+                                                        data: originalData,
+                                                        Bid: Bid,
+                                                        Details: Details,
+                                                        ReturnDetails: ReturnDetails,
+                                                        name: req.query.name,
+                                                        ShowPayment: true
+                                                    })
+                                                } else {
+                                                    res.end(err1);
+                                                }
                                             })
-                                        }else{
-                                            res.end(err1);
-                                        }
-                                    })
-                                })
+                                        })
+                                    } else if (originalData.travelMode == 2) {
+                                        train.addTrain(originalData, Bid, function (TrainData) {
+                                            Details = TrainData[0];
+                                            ReturnDetails = TrainData[1];
+                                            console.log("data : ", TrainData);
+                                            console.log(TrainData[1]);
 
-                            } else {
-                                bus.addBus(originalData, Bid, function (BusData) {
-                                    Details = BusData[0];
-                                    ReturnDetails = BusData[1];
-                                    console.log("data : ", BusData);
-                                    console.log(BusData[1]);
-
-                                    bdb.addMembers(originalData, bid, function (status,err1) {
-                                        if(status !=1) {
-                                            console.log("in here after all additions")
-                                            res.render('pages/BookingDetails', {
-                                                data: originalData,
-                                                Bid: Bid,
-                                                Details: Details,
-                                                ReturnDetails: ReturnDetails,
-                                                name: req.query.name,
-                                                ShowPayment: true
+                                            bdb.addMembers(originalData, bid, function (status, err1) {
+                                                if (status != 1) {
+                                                    console.log("in here after all additions")
+                                                    res.render('pages/BookingDetails', {
+                                                        data: originalData,
+                                                        Bid: Bid,
+                                                        Details: Details,
+                                                        ReturnDetails: ReturnDetails,
+                                                        name: req.query.name,
+                                                        ShowPayment: true
+                                                    })
+                                                } else {
+                                                    res.end(err1);
+                                                }
                                             })
-                                        }else{
-                                            res.end(err1);
-                                        }
-                                    })
-                                })
+                                        })
+
+                                    } else {
+                                        bus.addBus(originalData, Bid, function (BusData) {
+                                            Details = BusData[0];
+                                            ReturnDetails = BusData[1];
+                                            console.log("data : ", BusData);
+                                            console.log(BusData[1]);
+
+                                            bdb.addMembers(originalData, bid, function (status, err1) {
+                                                if (status != 1) {
+                                                    console.log("in here after all additions")
+                                                    res.render('pages/BookingDetails', {
+                                                        data: originalData,
+                                                        Bid: Bid,
+                                                        Details: Details,
+                                                        ReturnDetails: ReturnDetails,
+                                                        name: req.query.name,
+                                                        ShowPayment: true
+                                                    })
+                                                } else {
+                                                    res.end(err1);
+                                                }
+                                            })
+                                        })
+                                    }
+                                });
+                            }
+                            console.log(dd);
+                            if (dd == 0) {
+
+                                res.end("Enter a correct destination name")
                             }
                         });
                     }
-                    console.log(dd);
-                    if (dd == 0) {
+                    console.log(ss);
+                    if (ss == 0) {
 
-                        res.end( "Enter a correct destination name")
+                        res.end("Enter a correct source name")
                     }
                 });
             }
-            console.log(ss);
-            if (ss == 0) {
+    })
 
-                res.end("Enter a correct source name")
-            }
-        });
+
     }
 });
 app.post('/BookingDetailsInHistory',function(req,res){

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4ca6f9c4-4329-4844-badd-843a00c5e59f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/views/pages/userdetails.ejs" afterPath="$PROJECT_DIR$/views/pages/userdetails.ejs" />
+      <change beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -87,25 +87,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-373">
-              <caret line="162" column="41" lean-forward="true" selection-start-line="162" selection-start-column="41" selection-end-line="162" selection-end-column="41" />
+            <state relative-caret-position="-1330">
+              <caret line="212" column="34" lean-forward="false" selection-start-line="212" selection-start-column="34" selection-end-line="212" selection-end-column="34" />
               <folding>
-                <element signature="e#8044#10005#0" expanded="false" />
-                <element signature="e#10136#14650#0" expanded="false" />
-                <element signature="e#14761#14994#0" expanded="false" />
+                <element signature="e#792#1339#0" expanded="false" />
+                <element signature="e#18355#20316#0" expanded="false" />
+                <element signature="e#25072#25305#0" expanded="false" />
                 <element signature="n#!!block;n#formatDate#0" expanded="false" />
-                <element signature="e#15332#17528#0" expanded="false" />
-                <element signature="e#17990#18224#0" expanded="false" />
-                <element signature="e#18339#19196#0" expanded="false" />
-                <element signature="e#19239#20023#0" expanded="false" />
-                <element signature="e#20064#20652#0" expanded="false" />
-                <element signature="e#20744#20930#0" expanded="false" />
-                <element signature="e#20984#21372#0" expanded="false" />
-                <element signature="e#21419#21713#0" expanded="false" />
-                <marker date="1524680587000" expanded="true" signature="3095:7620" ph="{...}" />
+                <element signature="e#25643#27839#0" expanded="false" />
+                <element signature="n#!!block;n#getRandomInt#0" expanded="false" />
+                <element signature="e#28301#28535#0" expanded="false" />
+                <element signature="e#28650#29507#0" expanded="false" />
+                <element signature="e#29550#30334#0" expanded="false" />
+                <element signature="e#30375#30963#0" expanded="false" />
+                <element signature="e#31055#31241#0" expanded="false" />
+                <element signature="e#31295#31683#0" expanded="false" />
+                <element signature="e#31730#32024#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -121,7 +121,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userdetails.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="userdetails.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/pages/userdetails.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="236">
@@ -201,9 +201,9 @@
         <option value="$PROJECT_DIR$/db/flight.js" />
         <option value="$PROJECT_DIR$/views/pages/BookingDetails.ejs" />
         <option value="$PROJECT_DIR$/views/pages/Successful.ejs" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/db/booking_db.js" />
         <option value="$PROJECT_DIR$/views/pages/userdetails.ejs" />
+        <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
   </component>
@@ -356,7 +356,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="241387000" />
+    <option name="totallyTimeSpent" value="244155000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -771,28 +771,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-373">
-          <caret line="162" column="41" lean-forward="true" selection-start-line="162" selection-start-column="41" selection-end-line="162" selection-end-column="41" />
-          <folding>
-            <element signature="e#8044#10005#0" expanded="false" />
-            <element signature="e#10136#14650#0" expanded="false" />
-            <element signature="e#14761#14994#0" expanded="false" />
-            <element signature="n#!!block;n#formatDate#0" expanded="false" />
-            <element signature="e#15332#17528#0" expanded="false" />
-            <element signature="e#17990#18224#0" expanded="false" />
-            <element signature="e#18339#19196#0" expanded="false" />
-            <element signature="e#19239#20023#0" expanded="false" />
-            <element signature="e#20064#20652#0" expanded="false" />
-            <element signature="e#20744#20930#0" expanded="false" />
-            <element signature="e#20984#21372#0" expanded="false" />
-            <element signature="e#21419#21713#0" expanded="false" />
-            <marker date="1524680587000" expanded="true" signature="3095:7620" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/booking_db.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2283">
@@ -806,6 +784,28 @@
         <state relative-caret-position="236">
           <caret line="72" column="61" lean-forward="false" selection-start-line="72" selection-start-column="61" selection-end-line="72" selection-end-column="61" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1330">
+          <caret line="212" column="34" lean-forward="false" selection-start-line="212" selection-start-column="34" selection-end-line="212" selection-end-column="34" />
+          <folding>
+            <element signature="e#792#1339#0" expanded="false" />
+            <element signature="e#18355#20316#0" expanded="false" />
+            <element signature="e#25072#25305#0" expanded="false" />
+            <element signature="n#!!block;n#formatDate#0" expanded="false" />
+            <element signature="e#25643#27839#0" expanded="false" />
+            <element signature="n#!!block;n#getRandomInt#0" expanded="false" />
+            <element signature="e#28301#28535#0" expanded="false" />
+            <element signature="e#28650#29507#0" expanded="false" />
+            <element signature="e#29550#30334#0" expanded="false" />
+            <element signature="e#30375#30963#0" expanded="false" />
+            <element signature="e#31055#31241#0" expanded="false" />
+            <element signature="e#31295#31683#0" expanded="false" />
+            <element signature="e#31730#32024#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
